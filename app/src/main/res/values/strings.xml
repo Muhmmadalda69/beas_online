@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">beas</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_text">Belajar Aksara Sunda</string>
+    <string name="rarangken_atas">Lambang dan fungsi rarangkén yang ditulis di atas aksara ngalagena</string>
+    <string name="rarangken_bawah">Lambang dan fungsi rarangkén yang ditulis di bawah aksara ngalagena</string>
+    <string name="rarangken_sejajar">Lambang dan fungsi rarangkén yang ditulis sejajar dengan aksara ngalagena</string>
+    <string name="ket_rarangken_ngalagena">rarangkén untuk disandingkan dengan aksara ngalagena ada 13 buah</string>
+
+</resources>

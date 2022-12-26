@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.beas">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Beas">
+        <activity
+            android:name=".LupaPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditPasswordActivity"
+            android:exported="false" /> <!-- Menambahkan Activity Untuk Cropping Image -->
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DaftarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".L5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".L4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".L3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".L2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".PustakaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LihatSkorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".L1Activity"
+            android:exported="false" />
+        <activity
+            android:name=".TebakActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

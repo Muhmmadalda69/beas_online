@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "644652091855",
+    "project_id": "beas-dfb0e",
+    "storage_bucket": "beas-dfb0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644652091855:android:f915b463606a071c2b2aba",
+        "android_client_info": {
+          "package_name": "com.example.beas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644652091855-453dbd101sd55g8491pbvmv8mnia3k1g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADqwT_CIoHvgqwsgifBjTSsxEgUNOnauQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644652091855-453dbd101sd55g8491pbvmv8mnia3k1g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

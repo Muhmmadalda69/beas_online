@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/profil_background"
+    android:padding="30dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ProfileActivity">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:elevation="12dp"
+            app:cardCornerRadius="50dp"
+            android:layout_marginTop="35dp"
+            android:layout_centerHorizontal="true"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9">
+            <ImageView
+                android:id="@+id/foto_akun"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:cropToPadding="true"
+                android:src="@drawable/profile_male"
+                tools:ignore="MissingConstraints" />
+        </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_nama"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:fontFamily="@font/aladin"
+                android:textColor="@color/warna_dasar"
+                android:text="Nama User"
+                android:textSize="30dp"/>
+
+        <Button
+            android:id="@+id/bt_editprofile"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/kotak"
+            android:text="Edit Profil"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/bt_editpassword"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/kotak"
+            android:text="Edit Password"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/bt_logout"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/kotak"
+            android:text="logout"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+
+</LinearLayout>

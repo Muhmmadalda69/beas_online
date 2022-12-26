@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="30dp"
+    tools:context=".TebakActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tebak Aksara"
+        android:gravity="center"
+        android:fontFamily="@font/aladin_reguler"
+        android:textColor="@color/warna_dasar"
+        android:textSize="40dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/l1"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@drawable/kotak"
+                android:text="Level 1"
+                style="@style/style_button"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                tools:ignore="MissingConstraints"/>
+
+            <Button
+                android:id="@+id/l2"
+                style="@style/style_button"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_toEndOf="@+id/l1"
+                android:background="@drawable/kotak"
+                android:text="Level 2"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/l3"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@drawable/kotak"
+                android:text="Level 3"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/l1"
+                android:layout_marginTop="40dp"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/l4"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/l2"
+                android:layout_marginTop="40dp"
+                android:layout_toEndOf="@+id/l3"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/kotak"
+                android:text="Level 4"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/l5"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/l3"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/kotak"
+                android:text="Level 5"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/l6"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/l4"
+                android:layout_marginTop="40dp"
+                android:layout_toEndOf="@+id/l5"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/kotak"
+                android:text="Level 6"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/l7"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@drawable/kotak"
+                android:text="Level 7"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/l5"
+                android:layout_marginTop="40dp"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/l8"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/l6"
+                android:layout_marginTop="40dp"
+                android:layout_toEndOf="@+id/l3"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/kotak"
+                android:text="Level 8"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/l9"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@drawable/kotak"
+                android:text="Level 9"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/l7"
+                android:layout_marginTop="40dp"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/l10"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/l8"
+                android:layout_marginTop="40dp"
+                android:layout_toEndOf="@+id/l3"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/kotak"
+                android:text="Level 10"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/l10"
+                android:layout_marginTop="40dp"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>
