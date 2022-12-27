@@ -8,7 +8,6 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.InputType;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -145,16 +144,9 @@ public class L1Activity extends AppCompatActivity {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(L1Activity.this);
         alertDialog.setTitle(" Nilai Kamu : " + jumlahSkor);
-        final EditText inputNama = new EditText(L1Activity.this);
-        inputNama.setHint("Masukan Nama Kamu");
-        inputNama.setInputType(InputType.TYPE_CLASS_TEXT);
-        alertDialog.setView(inputNama);
 
         alertDialog.setPositiveButton("Ok", (dialogInterface, i) -> {
-            String namaPemain = inputNama.getText().toString();
-
             ContentValues values = new ContentValues();
-            values.put(DBHelper.row_nama,namaPemain);
             values.put(DBHelper.row_skor1,jumlahSkor);
             //menyimpan data
             helper.insertData(values);
