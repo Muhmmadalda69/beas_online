@@ -41,10 +41,9 @@ public class L1Activity extends AppCompatActivity {
     private TextView timer;
     private TimerClass timerClass;
 
-    //firebase
+    //FIREBASE
     public static final String EXTRA_NILAI1 = "extra_nilai1";
     private Nilai nilai1;
-    private String idNilai;
     DatabaseReference database;
 
     @Override
@@ -152,26 +151,38 @@ public class L1Activity extends AppCompatActivity {
         }
     }
 
+    //FIREBASE
     private void Selesai() {
         jumlahSkor = String.valueOf(skor);    //menjadikan skor menjadi string
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(L1Activity.this);
-        alertDialog.setTitle(" Nilai Kamu : " + jumlahSkor);
+        //ubah alert
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        alertDialog.setPositiveButton("Ok", (dialogInterface, i) -> {
+        // set title dialog
+        alertDialogBuilder.setTitle("GAME SELESAI");
 
-            if(database != null){
-                skorMinim();
-                updateNilai();
-            }else{
-                //menyimpan ke realtime firebase
-                skorMinim();
-                nilai1 = new Nilai();
-                submitSkor(new Nilai(jumlahSkor));
-            }
-        });
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setMessage("Nilai Kamu : " + jumlahSkor)
+                .setIcon(R.mipmap.ic_logo)
+                .setCancelable(false)
+                .setPositiveButton("Ok", (dialog, id) -> {
+                    if(database != null){
+                        skorMinim();
+                        updateNilai();
+                    }else{
+                        //menyimpan ke realtime firebase
+                        skorMinim();
+                        nilai1 = new Nilai();
+                        submitSkor(new Nilai(jumlahSkor));
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
         alertDialog.show();
-
     }
     private void skorMinim() {
         int SkorMinim = Integer.parseInt(jumlahSkor);
@@ -192,6 +203,7 @@ public class L1Activity extends AppCompatActivity {
         }
     }
 
+    //FIREBASE
     private void updateNilai() {
         database.child("skor 1") //akses parent index, ibaratnya seperti nama tabel
                 .setValue(jumlahSkor);
@@ -203,6 +215,7 @@ public class L1Activity extends AppCompatActivity {
          * dan juga kita set onSuccessListener yang berisi kode yang akan dijalankan
          * ketika data berhasil ditambahkan
          */
+        //ubah
         nilai1.setSkor_1(jumlahSkor);
         database.child("skor 1").push().setValue(nilai_1);
     }
@@ -217,8 +230,7 @@ public class L1Activity extends AppCompatActivity {
     }
 
     private void showDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         // set title dialog
         alertDialogBuilder.setTitle("mau Keluar dari game?");

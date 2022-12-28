@@ -15,6 +15,8 @@ public class Nilai implements Serializable{
     private String skor_1;
     private String skor_2;
     private String skor_3;
+    private String skor_4;
+    private String skor_5;
 
     public Nilai(){
 
@@ -51,12 +53,30 @@ public class Nilai implements Serializable{
         this.skor_3 = skor_3;
     }
 
+    public String getSkor_4() {
+        return skor_4;
+    }
+
+    public void setSkor_4(String skor_4) {
+        this.skor_4 = skor_4;
+    }
+
+    public String getSkor_5() {
+        return skor_5;
+    }
+
+    public void setSkor_5(String skor_5) {
+        this.skor_5 = skor_5;
+    }
+
     @Override
     public String toString() {
         return " "+key+"\n" +
                 " "+skor_1 +"\n" +
                 " "+skor_2 +"\n" +
-                " "+skor_3;
+                " "+skor_3 +"\n" +
+                " "+skor_4 +"\n" +
+                " "+skor_5;
     }
 
     public Nilai(String skor1){

@@ -1,23 +1,24 @@
 package com.example.beas;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.InputType;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.beas.helper.DBHelper;
+import com.example.beas.model.Nilai;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
@@ -36,6 +37,11 @@ public class L4Activity extends AppCompatActivity {
     //ubah
     DBSoal soal = new DBSoal();
 
+    //FIREBASE
+    public static final String EXTRA_NILAI4 = "extra_nilai4";
+    private Nilai nilai4;
+    DatabaseReference database;
+
     private TextView timer;
     private TimerClass timerClass;
 
@@ -44,6 +50,11 @@ public class L4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //ubah
         setContentView(R.layout.activity_l4);
+
+        //FIREBASE
+        database = FirebaseDatabase.getInstance().getReference();
+        nilai4 = new Nilai();
+        nilai4 = getIntent().getParcelableExtra(EXTRA_NILAI4);
 
         tv_skor = findViewById(R.id.tv_skor);
         tv_soalKe = findViewById(R.id.tv_soalKe);
@@ -143,46 +154,73 @@ public class L4Activity extends AppCompatActivity {
             Selesai();
         }
     }
-
+    //FIREBASE
     private void Selesai() {
         jumlahSkor = String.valueOf(skor);    //menjadikan skor menjadi string
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(L4Activity.this);
-        alertDialog.setTitle(" Nilai Kamu : " + jumlahSkor);
-        final EditText inputNama = new EditText(L4Activity.this);
-        inputNama.setHint("Masukan Nama Kamu");
-        inputNama.setInputType(InputType.TYPE_CLASS_TEXT);
-        alertDialog.setView(inputNama);
+        //ubah alert
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        alertDialog.setPositiveButton("Ok", (dialogInterface, i) -> {
-            String namaPemain = inputNama.getText().toString();
+        // set title dialog
+        alertDialogBuilder.setTitle("GAME SELESAI");
 
-            ContentValues values = new ContentValues();
-            values.put(DBHelper.row_nama,namaPemain);
-            values.put(DBHelper.row_skor1,jumlahSkor);
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setMessage("Nilai Kamu : " + jumlahSkor)
+                .setIcon(R.mipmap.ic_logo)
+                .setCancelable(false)
+                .setPositiveButton("Ok", (dialog, id) -> {
+                    if(database != null){
+                        skorMinim();
+                        updateNilai();
+                    }else{
+                        //menyimpan ke realtime firebase
+                        skorMinim();
+                        nilai4 = new Nilai();
+                        submitSkor(new Nilai(jumlahSkor));
+                    }
+                });
 
-            //menyimpan data
-            helper.insertData(values);
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
 
-            int SkorMinim = Integer.parseInt(jumlahSkor);
-            if(SkorMinim >= 70){
-                Toast.makeText(L4Activity.this, "Anda bisa lanjut LEVEL 5", Toast.LENGTH_LONG).show();
-
-                //ubah
-                SharedPreferences preferences = getSharedPreferences("PREFS4",0);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt("SkorLulus4", SkorMinim);
-                editor.apply();
-
-                Intent intent = new Intent(getApplicationContext(),TebakActivity.class);
-                startActivity(intent);
-                finish();
-            }else {
-                Toast.makeText(L4Activity.this, "Minimal skor untuk lanjut level adalah \b 70", Toast.LENGTH_LONG).show();
-                finish();
-            }
-        });
+        // menampilkan alert dialog
         alertDialog.show();
+    }
+    private void skorMinim() {
+        int SkorMinim = Integer.parseInt(jumlahSkor);
+        if(SkorMinim >= 70){
+            Toast.makeText(L4Activity.this, "Anda bisa lanjut ke LEVEL 5", Toast.LENGTH_LONG).show();
+
+            SharedPreferences preferences = getSharedPreferences("PREFS",0);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("SkorLulus", SkorMinim);
+            editor.apply();
+
+            Intent intent = new Intent(getApplicationContext(),TebakActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            Toast.makeText(L4Activity.this, "Minimal skor untuk lanjut level 5 adalah \b70\b", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+
+    //FIREBASE
+    private void updateNilai() {
+        database.child("skor 4") //akses parent index, ibaratnya seperti nama tabel
+                .setValue(jumlahSkor);
+    }
+
+    private void submitSkor(Nilai nilai_4) {
+        /**
+         * Ini adalah kode yang digunakan untuk mengirimkan data ke Firebase Realtime Database
+         * dan juga kita set onSuccessListener yang berisi kode yang akan dijalankan
+         * ketika data berhasil ditambahkan
+         */
+        //ubah
+        nilai4.setSkor_4(jumlahSkor);
+        database.child("skor 4").push().setValue(nilai_4);
     }
 
     public void onStart() {
