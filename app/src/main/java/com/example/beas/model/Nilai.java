@@ -1,67 +1,65 @@
 package com.example.beas.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import com.google.firebase.database.IgnoreExtraProperties;
 
-public class Nilai implements Parcelable {
-    private String id;
-    private String nim;
-    private String nama;
+import java.io.Serializable;
 
-    public Nilai() {
+/**
+ * Created by Herdi_WORK on 18.06.17.
+ */
+
+@IgnoreExtraProperties
+public class Nilai implements Serializable{
+
+    private String key;
+    private String skor_1;
+    private String skor_2;
+    private String skor_3;
+
+    public Nilai(){
+
     }
 
-    public String getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public String getNim() {
-        return nim;
+    public String getSkor_1() {
+        return skor_1;
     }
 
-    public void setNim(String nim) {
-        this.nim = nim;
+    public void setSkor_1(String skor_1) {
+        this.skor_1 = skor_1;
+    }
+    public String getSkor_2() {
+        return skor_2;
     }
 
-    public String getNama() {
-        return nama;
+    public void setSkor_2(String skor_2) {
+        this.skor_2 = skor_2;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public String getSkor_3() {
+        return skor_3;
+    }
+
+    public void setSkor_3(String skor_3) {
+        this.skor_3 = skor_3;
     }
 
     @Override
-    public int describeContents() {
-        return 0;
+    public String toString() {
+        return " "+key+"\n" +
+                " "+skor_1 +"\n" +
+                " "+skor_2 +"\n" +
+                " "+skor_3;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeString(this.nim);
-        dest.writeString(this.nama);
+    public Nilai(String skor1){
+        skor_1 = skor1;
     }
-
-    protected Nilai(Parcel in) {
-        this.id = in.readString();
-        this.nim = in.readString();
-        this.nama = in.readString();
-    }
-
-    public static final Parcelable.Creator<Nilai> CREATOR = new Parcelable.Creator<Nilai>() {
-        @Override
-        public Nilai createFromParcel(Parcel source) {
-            return new Nilai(source);
-        }
-
-        @Override
-        public Nilai[] newArray(int size) {
-            return new Nilai[size];
-        }
-    };
 }

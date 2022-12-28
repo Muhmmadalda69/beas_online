@@ -1,7 +1,7 @@
 package com.example.beas;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -17,6 +17,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beas.helper.DBHelper;
+import com.example.beas.model.Nilai;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,10 +41,21 @@ public class L1Activity extends AppCompatActivity {
     private TextView timer;
     private TimerClass timerClass;
 
+    //firebase
+    public static final String EXTRA_NILAI1 = "extra_nilai1";
+    private Nilai nilai1;
+    private String idNilai;
+    DatabaseReference database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_l1);
+
+        //FIREBASE
+        database = FirebaseDatabase.getInstance().getReference();
+        nilai1 = new Nilai();
+        nilai1 = getIntent().getParcelableExtra(EXTRA_NILAI1);
 
         tv_skor = findViewById(R.id.tv_skor);
         tv_soalKe = findViewById(R.id.tv_soalKe);
@@ -108,7 +122,6 @@ public class L1Activity extends AppCompatActivity {
         iv_huruf.setImageDrawable(drawable);
     }
 
-
     //Membuat InnerClass untuk konfigurasi Countdown Time
     public class TimerClass extends CountDownTimer {
 
@@ -146,29 +159,52 @@ public class L1Activity extends AppCompatActivity {
         alertDialog.setTitle(" Nilai Kamu : " + jumlahSkor);
 
         alertDialog.setPositiveButton("Ok", (dialogInterface, i) -> {
-            ContentValues values = new ContentValues();
-            values.put(DBHelper.row_skor1,jumlahSkor);
-            //menyimpan data
-            helper.insertData(values);
 
-            int SkorMinim = Integer.parseInt(jumlahSkor);
-            if(SkorMinim >= 70){
-                Toast.makeText(L1Activity.this, "Anda bisa lanjut ke LEVEL 2", Toast.LENGTH_LONG).show();
-
-                SharedPreferences preferences = getSharedPreferences("PREFS",0);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt("SkorLulus", SkorMinim);
-                editor.apply();
-
-                Intent intent = new Intent(getApplicationContext(),TebakActivity.class);
-                startActivity(intent);
-                finish();
-            }else {
-                Toast.makeText(L1Activity.this, "Minimal skor untuk lanjut level 2 adalah \b 70", Toast.LENGTH_LONG).show();
-                finish();
+            if(database != null){
+                skorMinim();
+                updateNilai();
+            }else{
+                //menyimpan ke realtime firebase
+                skorMinim();
+                nilai1 = new Nilai();
+                submitSkor(new Nilai(jumlahSkor));
             }
         });
         alertDialog.show();
+
+    }
+    private void skorMinim() {
+        int SkorMinim = Integer.parseInt(jumlahSkor);
+        if(SkorMinim >= 70){
+            Toast.makeText(L1Activity.this, "Anda bisa lanjut ke LEVEL 2", Toast.LENGTH_LONG).show();
+
+            SharedPreferences preferences = getSharedPreferences("PREFS",0);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("SkorLulus", SkorMinim);
+            editor.apply();
+
+            Intent intent = new Intent(getApplicationContext(),TebakActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            Toast.makeText(L1Activity.this, "Minimal skor untuk lanjut level 2 adalah \b 70", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+
+    private void updateNilai() {
+        database.child("skor 1") //akses parent index, ibaratnya seperti nama tabel
+                .setValue(jumlahSkor);
+    }
+
+    private void submitSkor(Nilai nilai_1) {
+        /**
+         * Ini adalah kode yang digunakan untuk mengirimkan data ke Firebase Realtime Database
+         * dan juga kita set onSuccessListener yang berisi kode yang akan dijalankan
+         * ketika data berhasil ditambahkan
+         */
+        nilai1.setSkor_1(jumlahSkor);
+        database.child("skor 1").push().setValue(nilai_1);
     }
 
     public void onStart() {
