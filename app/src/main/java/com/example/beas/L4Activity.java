@@ -192,9 +192,9 @@ public class L4Activity extends AppCompatActivity {
         if(SkorMinim >= 70){
             Toast.makeText(L4Activity.this, "Anda bisa lanjut ke LEVEL 5", Toast.LENGTH_LONG).show();
 
-            SharedPreferences preferences = getSharedPreferences("PREFS",0);
+            SharedPreferences preferences = getSharedPreferences("PREFS4",0);
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("SkorLulus", SkorMinim);
+            editor.putInt("SkorLulus4", SkorMinim);
             editor.apply();
 
             Intent intent = new Intent(getApplicationContext(),TebakActivity.class);

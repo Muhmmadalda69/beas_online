@@ -194,9 +194,9 @@ public class L3Activity extends AppCompatActivity {
         if(SkorMinim >= 70){
             Toast.makeText(L3Activity.this, "Anda bisa lanjut ke LEVEL 4", Toast.LENGTH_LONG).show();
 
-            SharedPreferences preferences = getSharedPreferences("PREFS",0);
+            SharedPreferences preferences = getSharedPreferences("PREFS3",0);
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("SkorLulus", SkorMinim);
+            editor.putInt("SkorLulus3", SkorMinim);
             editor.apply();
 
             Intent intent = new Intent(getApplicationContext(),TebakActivity.class);
