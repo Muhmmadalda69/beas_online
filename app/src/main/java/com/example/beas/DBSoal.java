@@ -14,7 +14,7 @@ public class DBSoal {
                 "a",
             "i",
             "u",
-            "e_aksen",
+            "é",
             "o",
             "eu",
             "e")

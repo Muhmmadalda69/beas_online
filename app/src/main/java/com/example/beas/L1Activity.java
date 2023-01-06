@@ -33,6 +33,7 @@ public class L1Activity extends AppCompatActivity {
     int x ;
     int arr=10;
     int skor, soalKe = 1;
+    String mPhoto;
     String jawaban;
     String jumlahSkor;
 
@@ -99,6 +100,7 @@ public class L1Activity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SuspiciousIndentation")
     private void setKonten() {
             et_jawaban.setText(null);
         if(x >= arr) { //jika nilai x melebihi nilai arr(panjang array) maka akan pindah activity (kuis selesai)
@@ -114,11 +116,20 @@ public class L1Activity extends AppCompatActivity {
     private void ubahGambar() {
         Resources res = getResources();
         jawaban = soall1.getPertanyaan_satu(x);
-        String mPhoto = jawaban;
+        cekPhoto();
         int resID = res.getIdentifier(mPhoto, "drawable", getPackageName());
         @SuppressLint("UseCompatLoadingForDrawables")
         Drawable drawable = res.getDrawable(resID);
         iv_huruf.setImageDrawable(drawable);
+    }
+
+    private String cekPhoto() {
+        if(jawaban =="é"){
+            mPhoto = "e_aksen";
+        }else{
+            mPhoto = jawaban;
+        }
+        return jawaban;
     }
 
     //Membuat InnerClass untuk konfigurasi Countdown Time
