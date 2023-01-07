@@ -214,11 +214,6 @@ public class L5Activity extends AppCompatActivity {
     }
 
     private void submitSkor(Nilai nilai_5) {
-        /**
-         * Ini adalah kode yang digunakan untuk mengirimkan data ke Firebase Realtime Database
-         * dan juga kita set onSuccessListener yang berisi kode yang akan dijalankan
-         * ketika data berhasil ditambahkan
-         */
         //ubah
         nilai5.setSkor_5(jumlahSkor);
         database.child("skor 5").push().setValue(nilai_5);

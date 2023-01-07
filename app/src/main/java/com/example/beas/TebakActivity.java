@@ -35,8 +35,8 @@ public class TebakActivity extends AppCompatActivity {
 
         //kunci 3
         button_l3.setEnabled(false);
-        SharedPreferences mSettings2 = getSharedPreferences("PREFS",0);
-        int nilai2 = mSettings2.getInt("SkorLulus",0);
+        SharedPreferences mSettings2 = getSharedPreferences("PREFS2",0);
+        int nilai2 = mSettings2.getInt("SkorLulus2",0);
 
         //kunci 4
         button_l4.setEnabled(false);

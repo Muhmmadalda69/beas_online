@@ -194,9 +194,9 @@ public class L2Activity extends AppCompatActivity {
             //ubah
             Toast.makeText(L2Activity.this, "Anda bisa lanjut ke LEVEL 3", Toast.LENGTH_LONG).show();
 
-            SharedPreferences preferences = getSharedPreferences("PREFS",0);
+            SharedPreferences preferences = getSharedPreferences("PREFS2",0);
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("SkorLulus", SkorMinim);
+            editor.putInt("SkorLulus2", SkorMinim);
             editor.apply();
 
             Intent intent = new Intent(getApplicationContext(),TebakActivity.class);
