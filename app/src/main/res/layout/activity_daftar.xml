@@ -25,6 +25,7 @@
         app:boxBackgroundMode="outline"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="30dp"
+        app:startIconDrawable="@drawable/ic_username"
         app:boxBackgroundColor="@color/white">
         <EditText
             android:id="@+id/et_username"
@@ -37,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:boxBackgroundMode="outline"
+        app:startIconDrawable="@drawable/ic_akun_bulat"
         android:layout_marginHorizontal="30dp"
         app:boxBackgroundColor="@color/white">
         <EditText
@@ -51,6 +53,7 @@
         android:layout_height="60dp"
         app:boxBackgroundMode="outline"
         android:layout_marginHorizontal="30dp"
+        app:startIconDrawable="@drawable/ic_alamat"
         app:boxBackgroundColor="@color/white">
         <EditText
             android:id="@+id/et_alamat"
@@ -63,6 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:boxBackgroundMode="outline"
+        app:startIconDrawable="@drawable/ic_round_lock_24"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="5dp"
         app:boxBackgroundColor="@color/white"
@@ -81,6 +85,7 @@
         app:boxBackgroundMode="outline"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="5dp"
+        app:startIconDrawable="@drawable/ic_round_lock_24"
         app:boxBackgroundColor="@color/white"
         app:passwordToggleEnabled="true">
         <EditText
