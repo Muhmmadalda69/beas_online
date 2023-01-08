@@ -53,7 +53,10 @@ public class DaftarActivity extends AppCompatActivity {
         progressDialog.setMessage("Silahkan tunggu...");
         progressDialog.setCancelable(false);
 
-        bt_login.setOnClickListener(view -> finish());
+        bt_login.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        });
 
         bt_daftar.setOnClickListener(view -> {
             progressDialog.show();

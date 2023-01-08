@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:boxBackgroundMode="outline"
-        app:startIconDrawable="@drawable/ic_akun_bulat"
+        app:startIconDrawable="@drawable/ic_email"
         android:layout_marginHorizontal="30dp"
         app:boxBackgroundColor="@color/white">
         <EditText

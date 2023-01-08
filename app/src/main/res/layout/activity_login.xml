@@ -24,7 +24,7 @@
         android:layout_height="60dp"
         app:boxBackgroundMode="outline"
         android:layout_marginHorizontal="30dp"
-        app:startIconDrawable="@drawable/ic_akun_bulat"
+        app:startIconDrawable="@drawable/ic_email"
         app:boxBackgroundColor="@color/white">
         <EditText
             android:id="@+id/et_username"
