@@ -18,9 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beas.helper.DBHelper;
 import com.example.beas.model.Nilai;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class L1Activity extends AppCompatActivity {
@@ -46,6 +49,7 @@ public class L1Activity extends AppCompatActivity {
     public static final String EXTRA_NILAI1 = "extra_nilai1";
     private Nilai nilai1;
     DatabaseReference database;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,15 +182,12 @@ public class L1Activity extends AppCompatActivity {
                 .setIcon(R.mipmap.ic_logo)
                 .setCancelable(false)
                 .setPositiveButton("Ok", (dialog, id) -> {
-                    if(database != null){
-                        skorMinim();
-                        updateNilai();
-                    }else{
                         //menyimpan ke realtime firebase
                         skorMinim();
+                        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                        String namaUser = Objects.requireNonNull(firebaseUser).getDisplayName();
                         nilai1 = new Nilai();
-                        submitSkor(new Nilai(jumlahSkor));
-                    }
+                        submitSkor(new Nilai(namaUser, jumlahSkor));
                 });
 
         // membuat alert dialog dari builder
@@ -214,12 +215,6 @@ public class L1Activity extends AppCompatActivity {
         }
     }
 
-    //FIREBASE
-    private void updateNilai() {
-        database.child("skor 1") //akses parent index, ibaratnya seperti nama tabel
-                .setValue(jumlahSkor);
-    }
-
     private void submitSkor(Nilai nilai_1) {
         /**
          * Ini adalah kode yang digunakan untuk mengirimkan data ke Firebase Realtime Database
@@ -228,7 +223,7 @@ public class L1Activity extends AppCompatActivity {
          */
         //ubah
         nilai1.setSkor_1(jumlahSkor);
-        database.child("skor 1").push().setValue(nilai_1);
+        database.child(nilai_1.getNamaUser()).child("level 1").setValue(nilai_1.getSkor_1());
     }
 
     public void onStart() {

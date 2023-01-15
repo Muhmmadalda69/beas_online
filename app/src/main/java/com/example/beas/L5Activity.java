@@ -17,9 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beas.helper.DBHelper;
 import com.example.beas.model.Nilai;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class L5Activity extends AppCompatActivity {
@@ -38,10 +41,10 @@ public class L5Activity extends AppCompatActivity {
     DBSoal soal = new DBSoal();
 
     //FIREBASE
-    public static final String EXTRA_NILAI5 = "extra_nilai5";
+    public static final String EXTRA_NILAI4 = "extra_nilai5";
     private Nilai nilai5;
     DatabaseReference database;
-
+    FirebaseUser firebaseUser;
 
     private TextView timer;
     private TimerClass timerClass;
@@ -50,11 +53,12 @@ public class L5Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //ubah
+        setContentView(R.layout.activity_l5);
 
         //FIREBASE
         database = FirebaseDatabase.getInstance().getReference();
         nilai5 = new Nilai();
-        nilai5 = getIntent().getParcelableExtra(EXTRA_NILAI5);
+        nilai5 = getIntent().getParcelableExtra("extra-nilai5");
 
         tv_skor = findViewById(R.id.tv_skor);
         tv_soalKe = findViewById(R.id.tv_soalKe);
@@ -154,7 +158,6 @@ public class L5Activity extends AppCompatActivity {
             Selesai();
         }
     }
-
     //FIREBASE
     private void Selesai() {
         jumlahSkor = String.valueOf(skor);    //menjadikan skor menjadi string
@@ -171,15 +174,12 @@ public class L5Activity extends AppCompatActivity {
                 .setIcon(R.mipmap.ic_logo)
                 .setCancelable(false)
                 .setPositiveButton("Ok", (dialog, id) -> {
-                    if(database != null){
-                        skorMinim();
-                        updateNilai();
-                    }else{
-                        //menyimpan ke realtime firebase
-                        skorMinim();
-                        nilai5 = new Nilai();
-                        submitSkor(new Nilai(jumlahSkor));
-                    }
+                    //menyimpan ke realtime firebase
+                    skorMinim();
+                    firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                    String namaUser = Objects.requireNonNull(firebaseUser).getDisplayName();
+                    nilai5 = new Nilai();
+                    submitSkor(new Nilai(namaUser, jumlahSkor));
                 });
 
         // membuat alert dialog dari builder
@@ -193,32 +193,30 @@ public class L5Activity extends AppCompatActivity {
         if(SkorMinim >= 70){
             Toast.makeText(L5Activity.this, "Anda bisa lanjut ke LEVEL 5", Toast.LENGTH_LONG).show();
 
-            SharedPreferences preferences = getSharedPreferences("PREFS",0);
+            SharedPreferences preferences = getSharedPreferences("PREFS5",0);
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("SkorLulus", SkorMinim);
+            editor.putInt("SkorLulus5", SkorMinim);
             editor.apply();
 
             Intent intent = new Intent(getApplicationContext(),TebakActivity.class);
             startActivity(intent);
             finish();
         }else {
-            Toast.makeText(L5Activity.this, "Minimal skor untuk lanjut level 5 adalah \b70", Toast.LENGTH_LONG).show();
+            Toast.makeText(L5Activity.this, "Minimal skor untuk lanjut level 5 adalah \b70\b", Toast.LENGTH_LONG).show();
             finish();
         }
     }
 
-    //FIREBASE
-    private void updateNilai() {
-        database.child("skor 5") //akses parent index, ibaratnya seperti nama tabel
-                .setValue(jumlahSkor);
-    }
-
     private void submitSkor(Nilai nilai_5) {
+        /**
+         * Ini adalah kode yang digunakan untuk mengirimkan data ke Firebase Realtime Database
+         * dan juga kita set onSuccessListener yang berisi kode yang akan dijalankan
+         * ketika data berhasil ditambahkan
+         */
         //ubah
         nilai5.setSkor_5(jumlahSkor);
-        database.child("skor 5").push().setValue(nilai_5);
+        database.child(nilai_5.getNamaUser()).child("level 5").setValue(nilai_5.getSkor_5());
     }
-
 
     public void onStart() {
         super.onStart();

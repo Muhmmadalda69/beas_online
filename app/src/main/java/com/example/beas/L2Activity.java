@@ -17,9 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beas.helper.DBHelper;
 import com.example.beas.model.Nilai;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class L2Activity extends AppCompatActivity {
@@ -42,6 +45,7 @@ public class L2Activity extends AppCompatActivity {
     private Nilai nilai2;
     private String idNila2;
     DatabaseReference database;
+    FirebaseUser firebaseUser;
 
     private TextView timer;
     private TimerClass timerClass;
@@ -170,16 +174,12 @@ public class L2Activity extends AppCompatActivity {
                 .setIcon(R.mipmap.ic_logo)
                 .setCancelable(false)
                 .setPositiveButton("Ok", (dialog, id) -> {
-                    //FIREBASE
-                    if(database != null){
-                        skorMinim();
-                        updateNilai();
-                    }else{
-                        //menyimpan ke realtime firebase
-                        skorMinim();
-                        nilai2 = new Nilai();
-                        submitSkor(new Nilai(jumlahSkor));
-                    }
+                    //menyimpan ke realtime firebase
+                    skorMinim();
+                    firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                    String namaUser = Objects.requireNonNull(firebaseUser).getDisplayName();
+                    nilai2 = new Nilai();
+                    submitSkor(new Nilai(namaUser, jumlahSkor));
                 });
 
         // membuat alert dialog dari builder
@@ -209,13 +209,6 @@ public class L2Activity extends AppCompatActivity {
         }
     }
 
-    //FIREBASE
-    private void updateNilai() {
-        //ubah
-        database.child("skor 2") //akses parent index, ibaratnya seperti nama tabel
-                .setValue(jumlahSkor);
-    }
-
     //ubah
     private void submitSkor(Nilai nilai_2) {
         /**
@@ -225,7 +218,7 @@ public class L2Activity extends AppCompatActivity {
          */
         //ubah
         nilai2.setSkor_2(jumlahSkor);
-        database.child("skor 2").push().setValue(nilai_2);
+        database.child(nilai_2.getNamaUser()).child("level 2").setValue(nilai_2.getSkor_2());
     }
 
     public void onStart() {

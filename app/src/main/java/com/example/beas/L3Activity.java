@@ -18,9 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beas.helper.DBHelper;
 import com.example.beas.model.Nilai;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class L3Activity extends AppCompatActivity {
@@ -42,6 +45,7 @@ public class L3Activity extends AppCompatActivity {
     public static final String EXTRA_NILAI3 = "extra_nilai3";
     private Nilai nilai3;
     DatabaseReference database;
+    FirebaseUser firebaseUser;
 
     private TextView timer;
     private TimerClass timerClass;
@@ -172,15 +176,12 @@ public class L3Activity extends AppCompatActivity {
                 .setIcon(R.mipmap.ic_logo)
                 .setCancelable(false)
                 .setPositiveButton("Ok", (dialog, id) -> {
-                    if(database != null){
-                        skorMinim();
-                        updateNilai();
-                    }else{
-                        //menyimpan ke realtime firebase
-                        skorMinim();
+                    //menyimpan ke realtime firebase
+                    skorMinim();
+                    firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                        String namaUser = Objects.requireNonNull(firebaseUser).getDisplayName();
                         nilai3 = new Nilai();
-                        submitSkor(new Nilai(jumlahSkor));
-                    }
+                        submitSkor(new Nilai(namaUser, jumlahSkor));
                 });
 
         // membuat alert dialog dari builder
@@ -222,7 +223,7 @@ public class L3Activity extends AppCompatActivity {
          */
         //ubah
         nilai3.setSkor_3(jumlahSkor);
-        database.child("skor 3").push().setValue(nilai_3);
+        database.child(nilai_3.getNamaUser()).child("level 3").setValue(nilai_3.getSkor_3());
     }
 
     public void onStart() {

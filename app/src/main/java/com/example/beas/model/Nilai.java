@@ -1,5 +1,6 @@
 package com.example.beas.model;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
@@ -11,7 +12,10 @@ import java.io.Serializable;
 @IgnoreExtraProperties
 public class Nilai implements Serializable{
 
+    FirebaseUser firebaseUser;
+
     private String key;
+    private String namaUser;
     private String skor_1;
     private String skor_2;
     private String skor_3;
@@ -28,6 +32,14 @@ public class Nilai implements Serializable{
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getNamaUser() {
+        return namaUser;
+    }
+
+    public void setNamaUser(String namaUser) {
+        this.namaUser = namaUser;
     }
 
     public String getSkor_1() {
@@ -79,7 +91,12 @@ public class Nilai implements Serializable{
                 " "+skor_5;
     }
 
-    public Nilai(String skor1){
-        skor_1 = skor1;
+    public Nilai(String userName, String skor){
+        namaUser = userName;
+        skor_1 = skor;
+        skor_2 = skor;
+        skor_3 = skor;
+        skor_4 = skor;
+        skor_5 = skor;
     }
 }

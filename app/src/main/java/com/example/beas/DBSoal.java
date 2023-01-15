@@ -113,7 +113,7 @@ public class DBSoal {
             "ku",
             "k",
             "kah",
-            "ke_kutip",
+            "ke_aksen",
             "ko",
             "kya",
             "ah",
