@@ -49,6 +49,9 @@ public class TebakActivity extends AppCompatActivity {
         int nilai4 = mSettings4.getInt("SkorLulus4",0);
 
         button_l6.setEnabled(false);
+        SharedPreferences mSettings5 = getSharedPreferences("PREFS5",0);
+        int nilai5 = mSettings5.getInt("SkorLulus5",0);
+
         button_l7.setEnabled(false);
         button_l8.setEnabled(false);
         button_l9.setEnabled(false);
@@ -93,6 +96,15 @@ public class TebakActivity extends AppCompatActivity {
                             startActivity(it);
                             finish();
                         });
+                        //LEVEL 6
+                        if (nilai5 >= 70) {
+                            button_l6.setEnabled(true);
+                            button_l6.setOnClickListener(view -> {
+                                Intent it = new Intent(TebakActivity.this, L5Activity.class);
+                                startActivity(it);
+                                finish();
+                            });
+                        }
                     }
                 }
             }

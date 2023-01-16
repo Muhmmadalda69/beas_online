@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.beas.helper.data_user;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,7 +25,6 @@ public class DaftarActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private data_user userS;
     DatabaseReference mDatabase;
 
     @Override

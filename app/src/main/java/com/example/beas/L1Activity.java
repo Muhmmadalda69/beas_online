@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.beas.helper.DBHelper;
 import com.example.beas.model.Nilai;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 
 public class L1Activity extends AppCompatActivity {
 
-    DBHelper helper;
     TextView tv_skor, tv_soalKe;
     ImageView iv_huruf;
     EditText et_jawaban;
@@ -48,8 +46,9 @@ public class L1Activity extends AppCompatActivity {
     //FIREBASE
     public static final String EXTRA_NILAI1 = "extra_nilai1";
     private Nilai nilai1;
-    DatabaseReference database;
     FirebaseUser firebaseUser;
+    FirebaseDatabase myRef = FirebaseDatabase.getInstance();
+    DatabaseReference database = myRef.getReference("db_skor");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,6 @@ public class L1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_l1);
 
         //FIREBASE
-        database = FirebaseDatabase.getInstance().getReference();
         nilai1 = new Nilai();
         nilai1 = getIntent().getParcelableExtra(EXTRA_NILAI1);
 
@@ -67,7 +65,6 @@ public class L1Activity extends AppCompatActivity {
         et_jawaban = findViewById(R.id.et_jawaban);
         bt_jawab = findViewById(R.id.bt_jawab);
 
-        helper = new DBHelper(this);
 
         timer = findViewById(R.id.tv_timer);
 
@@ -222,6 +219,7 @@ public class L1Activity extends AppCompatActivity {
          * ketika data berhasil ditambahkan
          */
         //ubah
+
         nilai1.setSkor_1(jumlahSkor);
         database.child(nilai_1.getNamaUser()).child("level 1").setValue(nilai_1.getSkor_1());
     }

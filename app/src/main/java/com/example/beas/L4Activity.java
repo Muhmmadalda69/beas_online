@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.beas.helper.DBHelper;
 import com.example.beas.model.Nilai;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 
 public class L4Activity extends AppCompatActivity {
 
-    DBHelper helper;
     TextView tv_skor, tv_soalKe;
     ImageView iv_huruf;
     EditText et_jawaban;
@@ -56,7 +54,7 @@ public class L4Activity extends AppCompatActivity {
         setContentView(R.layout.activity_l4);
 
         //FIREBASE
-        database = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDatabase.getInstance().getReference("db_skor");
         nilai4 = new Nilai();
         nilai4 = getIntent().getParcelableExtra(EXTRA_NILAI4);
 
@@ -65,8 +63,6 @@ public class L4Activity extends AppCompatActivity {
         iv_huruf = findViewById(R.id.iv_huruf);
         et_jawaban = findViewById(R.id.et_jawaban);
         bt_jawab = findViewById(R.id.bt_jawab);
-
-        helper = new DBHelper(this);
 
         timer = findViewById(R.id.tv_timer);
 
