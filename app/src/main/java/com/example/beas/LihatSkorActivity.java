@@ -2,16 +2,21 @@ package com.example.beas;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.beas.model.AdapterNilai;
 import com.example.beas.model.Nilai;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,43 +25,49 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LihatSkorActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("db_skor");
-    List<Nilai> list = new ArrayList<>();
-    RecyclerView recyclerView;
-    AdapterNilai adapterNilai;
+    DatabaseReference dbSkorRef = database.getReference("db_skor");
+    ListView listView;
+    Nilai nilai;
+
+    private ArrayList<Nilai> nilaiArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lihat_skor);
 
-        recyclerView = findViewById(R.id.tv_skor);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        listView = findViewById(R.id.tv_skor);
+        nilaiArrayList = new ArrayList<>();
 
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+    }
+
+
+    protected void onStart(){
+        super.onStart();
+        dbSkorRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Nilai value = snapshot.getValue(Nilai.class);
-                    list.add(value);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                nilaiArrayList.clear();
+                for (DataSnapshot nilaiSnapshot : dataSnapshot.getChildren()) {
+                    Nilai nilai = nilaiSnapshot.getValue(Nilai.class);
+                    nilaiArrayList.add(nilai);
                 }
-                recyclerView.setAdapter(new AdapterNilai(LihatSkorActivity.this, list));
+
+                AdapterNilai adapter = new AdapterNilai(LihatSkorActivity.this);
+                adapter.setNilaiArrayList(nilaiArrayList);
+                listView.setAdapter(adapter);
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(LihatSkorActivity.this, "Terjadi kesalahan.", Toast.LENGTH_SHORT).show();
             }
         });
-
-    }//end displayData
+    }
 
 }//end DisplayList class

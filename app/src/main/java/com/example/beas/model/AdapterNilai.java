@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,44 +12,63 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beas.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterNilai extends RecyclerView.Adapter<AdapterNilai.ViewHolder> {
+public class AdapterNilai extends BaseAdapter {
 
     Context context;
-    List<Nilai> list;
+    ArrayList<Nilai> list = new ArrayList<>();
 
-    public AdapterNilai(Context context, List<Nilai> list) {
+    public void setNilaiArrayList(ArrayList<Nilai> nilaiArrayList) {
+        this.list = nilaiArrayList;
+    }
+
+    public AdapterNilai(Context context) {
         this.context = context;
-        this.list = list;
     }
-
-    @NonNull
     @Override
-    public AdapterNilai.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_data, parent, false);
-        return new ViewHolder(view);
+    public int getCount() {
+        return list.size();
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterNilai.ViewHolder holder, int position) {
-        holder.listNama.setText(list.get(position).getNamaUser());
-        holder.listNama.setText(list.get(position).getTotal_skor());
+    public Object getItem(int i) {
+        return list.get(i);
     }
 
     @Override
-    public int getItemCount() {
-        return 0;
+    public long getItemId(int i) {
+        return i;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        View itemView = view;
 
-        TextView listNama, listSkor;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
+        if (itemView == null) {
+            itemView = LayoutInflater.from(context)
+                    .inflate(R.layout.row_data, viewGroup, false);
+        }
 
-            listNama = itemView.findViewById(R.id.listNama);
-            listSkor = itemView.findViewById(R.id.listSkor);
+        ViewHolder viewHolder = new ViewHolder(itemView);
+
+        Nilai nilai = (Nilai) getItem(i);
+        viewHolder.bind(nilai);
+        return itemView;
+    }
+
+    private class ViewHolder {
+        private TextView listNama, listSkor;
+
+        ViewHolder(View view) {
+            listNama = view.findViewById(R.id.listNama);
+            listSkor = view.findViewById(R.id.listSkor);
+        }
+
+        void bind(Nilai nilai) {
+            listNama.setText(nilai.getNamaUser());
+            listSkor.setText(nilai.getTotal_skor());
         }
     }
 }

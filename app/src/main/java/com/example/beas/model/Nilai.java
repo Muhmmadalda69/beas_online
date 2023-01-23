@@ -75,7 +75,7 @@ public class Nilai implements Serializable{
 
 
     public String getTotal_skor() {
-        return total_skor;
+        return total_skor = skor_1+skor_2+skor_3+skor_4+skor_5;
     }
 
     public void setTotal_skor(String total_skor) {
