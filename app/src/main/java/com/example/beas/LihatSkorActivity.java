@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.beas.model.AdapterNilai;
+import com.example.beas.model.HashMapAdapter;
 import com.example.beas.model.Nilai;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +30,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,7 +50,7 @@ public class LihatSkorActivity extends AppCompatActivity {
     Nilai nilai;
     int totalNilai = 0;
 
-    private ArrayList<Nilai> nilaiArrayList;
+    private List<HashMap<String, String>> dataList = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -58,7 +60,7 @@ public class LihatSkorActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.tv_skor);
         mySkor = findViewById(R.id.mySkor);
-        nilaiArrayList = new ArrayList<>();
+
 
         dbSkorRef.child(namaUser).addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,20 +82,27 @@ public class LihatSkorActivity extends AppCompatActivity {
     }
 
 
-/*
     protected void onStart(){
         super.onStart();
-        dbSkorRef.addValueEventListener(new ValueEventListener() {
+        Query query = dbTotal.orderByValue();
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                nilaiArrayList.clear();
+                dataList.clear();
                 for (DataSnapshot nilaiSnapshot : dataSnapshot.getChildren()) {
-                    Nilai nilai = nilaiSnapshot.getValue(Nilai.class);
-                    nilaiArrayList.add(nilai);
+                    String nama = nilaiSnapshot.getKey();
+                    Integer skor = nilaiSnapshot.getValue(Integer.class);
+
+                    // Example data for the HashMap
+                    HashMap<String, String> data1 = new HashMap<>();
+                    data1.put("nama", nama);
+                    data1.put("totalSkor", String.valueOf(skor));
+                    dataList.add(data1);
                 }
 
-                AdapterNilai adapter = new AdapterNilai(LihatSkorActivity.this);
-                adapter.setNilaiArrayList(nilaiArrayList);
+                // Find the ListView and set the adapter
+                ListView listView = (ListView) findViewById(R.id.tv_skor);
+                HashMapAdapter adapter = new HashMapAdapter(LihatSkorActivity.this, dataList);
                 listView.setAdapter(adapter);
             }
 
@@ -103,7 +112,5 @@ public class LihatSkorActivity extends AppCompatActivity {
             }
         });
     }
-
- */
 
 }//end DisplayList class
