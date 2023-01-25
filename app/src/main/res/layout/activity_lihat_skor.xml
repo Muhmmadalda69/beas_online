@@ -72,8 +72,21 @@
     <ListView
         android:id="@+id/tv_skor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="480dp"
         android:layout_marginHorizontal="30dp"
         tools:listitem="@layout/row_data"/>
+
+    <TextView
+        android:id="@+id/mySkor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="MY SKOR"
+        android:textSize="25dp"
+        android:paddingHorizontal="10dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/warna_dasar"
+        />
 
 </LinearLayout>
