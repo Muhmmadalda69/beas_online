@@ -1,7 +1,6 @@
 package com.example.beas;
 
 import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,8 +29,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class LihatSkorActivity extends AppCompatActivity {
@@ -84,22 +87,28 @@ public class LihatSkorActivity extends AppCompatActivity {
 
     protected void onStart(){
         super.onStart();
-        Query query = dbTotal.orderByValue();
-        query.addValueEventListener(new ValueEventListener() {
+        dbTotal.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dataList.clear();
-                for (DataSnapshot nilaiSnapshot : dataSnapshot.getChildren()) {
-                    String nama = nilaiSnapshot.getKey();
-                    Integer skor = nilaiSnapshot.getValue(Integer.class);
+                //tampil dari besar ke kecil
+                Map<String, Long> data = (Map<String, Long>) dataSnapshot.getValue();
 
-                    // Example data for the HashMap
+                List<Map.Entry<String, Long>> list = new ArrayList<>(data.entrySet());
+                Collections.sort(list, new Comparator<Map.Entry<String, Long>>() {
+                    @Override
+                    public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
+                        return o2.getValue().compareTo(o1.getValue());
+                    }
+                });
+
+                for (Map.Entry<String, Long> entry : list) {
                     HashMap<String, String> data1 = new HashMap<>();
-                    data1.put("nama", nama);
-                    data1.put("totalSkor", String.valueOf(skor));
+                    data1.put("nama", entry.getKey());
+                    data1.put("totalSkor", entry.getValue().toString());
                     dataList.add(data1);
                 }
-
                 // Find the ListView and set the adapter
                 ListView listView = (ListView) findViewById(R.id.tv_skor);
                 HashMapAdapter adapter = new HashMapAdapter(LihatSkorActivity.this, dataList);
