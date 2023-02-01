@@ -15,20 +15,15 @@
         android:gravity="center"
         android:paddingVertical="10dp">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="-15dp"
-            android:src="@drawable/logo" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:fontFamily="@font/aladin_reguler"
             android:text="Papan Skor"
+            android:layout_marginVertical="10dp"
             android:textColor="@color/warna_dasar"
-            android:textSize="50dp" />
+            android:textSize="40dp" />
     </LinearLayout>
 
 
@@ -63,7 +58,7 @@
     <ListView
         android:id="@+id/tv_skor"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
+        android:layout_height="560dp"
         android:layout_marginHorizontal="30dp"
         tools:listitem="@layout/row_data"/>
 
