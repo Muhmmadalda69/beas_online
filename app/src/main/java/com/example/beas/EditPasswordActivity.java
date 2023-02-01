@@ -29,7 +29,6 @@ public class EditPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_password);
 
-        et_pwlama = findViewById(R.id.et_pwlama);
         et_pwbaru = findViewById(R.id.et_pwbaru);
         et_konfirpw = findViewById(R.id.et_konfirpw);
         et_email = findViewById(R.id.et_email);
@@ -45,7 +44,7 @@ public class EditPasswordActivity extends AppCompatActivity {
 
         bt_save.setOnClickListener(view -> {
             progressDialog.show();
-            if(et_pwlama.getText().toString().equals(firebaseUser.getEmail())){
+            if(et_email.getText().toString().equals(firebaseUser.getEmail())){
                 if (et_pwbaru.getText().toString().equals(et_konfirpw.getText().toString())) {
 
                     getPassword = et_pwbaru.getText().toString().trim();

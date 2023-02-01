@@ -52,20 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:boxBackgroundMode="outline"
-        android:layout_marginHorizontal="30dp"
-        app:startIconDrawable="@drawable/ic_alamat"
-        app:boxBackgroundColor="@color/white">
-        <EditText
-            android:id="@+id/et_alamat"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Masukan Kota/Daerah"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:boxBackgroundMode="outline"
         app:startIconDrawable="@drawable/ic_round_lock_24"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="5dp"

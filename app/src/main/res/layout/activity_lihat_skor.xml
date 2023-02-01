@@ -26,20 +26,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:fontFamily="@font/aladin_reguler"
-            android:text="@string/app_text"
+            android:text="Papan Skor"
             android:textColor="@color/warna_dasar"
-            android:textSize="30dp" />
+            android:textSize="50dp" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="PAPAN SKOR"
-        android:gravity="center"
-        android:textColor="@color/warna_kedua"
-        android:textSize="30dp"
-        android:layout_marginVertical="5dp"
-        android:textStyle="bold"/>
 
     <RelativeLayout
         android:id="@+id/rl_header"

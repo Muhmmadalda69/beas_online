@@ -44,19 +44,6 @@
         android:text="ganti foto"
         android:gravity="center"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        app:boxBackgroundMode="outline"
-        app:boxBackgroundColor="@color/white">
-        <EditText
-            android:id="@+id/et_username"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Masukan Nama"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/bt_save"
         android:layout_width="match_parent"

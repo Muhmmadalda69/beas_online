@@ -21,11 +21,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class EditProfileActivity extends AppCompatActivity{
-    private EditText et_usernama;
     private Button bt_save, bt_batal;
     ProgressDialog progressDialog;
     private ImageView profileImageView;
@@ -41,7 +47,6 @@ public class EditProfileActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        et_usernama = findViewById(R.id.et_username);
         profileChangeBtn = findViewById(R.id.change_profile_btn);
         profileImageView =findViewById(R.id.foto_akun);
         bt_save = findViewById(R.id.bt_save);
@@ -50,7 +55,6 @@ public class EditProfileActivity extends AppCompatActivity{
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser != null) {
-            et_usernama.setText(firebaseUser.getDisplayName());
             profileImageView.setImageURI(firebaseUser.getPhotoUrl());
 
         }
@@ -68,7 +72,6 @@ public class EditProfileActivity extends AppCompatActivity{
             progressDialog.show();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(et_usernama.getText().toString())
                     .setPhotoUri(imageUri)
                     .build();
             assert user != null;
@@ -78,7 +81,7 @@ public class EditProfileActivity extends AppCompatActivity{
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 progressDialog.dismiss();
-                                Toast.makeText(EditProfileActivity.this, "Nama Diubah", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileActivity.this, "Foto Diubah", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
                                 finish();
                             }

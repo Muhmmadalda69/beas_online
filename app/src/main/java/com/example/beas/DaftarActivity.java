@@ -33,7 +33,6 @@ public class DaftarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_daftar);
 
         et_username = findViewById(R.id.et_username);
-        et_alamat = findViewById(R.id.et_alamat);
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
         et_konfirpassword = findViewById(R.id.et_konfirpassword);
