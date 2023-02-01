@@ -58,7 +58,6 @@ public class DaftarActivity extends AppCompatActivity {
         bt_daftar.setOnClickListener(view -> {
             progressDialog.show();
             if(et_username.getText().length()>0 &&
-                    et_alamat.getText().length()>0 &&
                     et_email.getText().length()>0 &&
                     et_password.getText().length()>0){
                 if(et_password.getText().toString().equals(et_konfirpassword.getText().toString())){
