@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="20dp">
+        android:paddingHorizontal="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +23,6 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="-15dp"
                 android:src="@drawable/logo" />
 
             <TextView
@@ -33,7 +32,7 @@
                 android:fontFamily="@font/aladin_reguler"
                 android:text="@string/app_text"
                 android:textColor="@color/warna_dasar"
-                android:textSize="30dp" />
+                android:textSize="25dp" />
         </LinearLayout>
 
         //aksara ngalagena

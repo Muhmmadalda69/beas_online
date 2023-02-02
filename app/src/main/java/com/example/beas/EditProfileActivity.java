@@ -71,9 +71,16 @@ public class EditProfileActivity extends AppCompatActivity{
         bt_save.setOnClickListener(view -> {
             progressDialog.show();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setPhotoUri(imageUri)
-                    .build();
+            UserProfileChangeRequest profileUpdates = null;
+            if (imageUri != null) {
+                profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setPhotoUri(imageUri)
+                        .build();
+            } else {
+                profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setPhotoUri(firebaseUser.getPhotoUrl())
+                        .build();
+            }
             assert user != null;
             user.updateProfile(profileUpdates)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
