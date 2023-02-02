@@ -24,8 +24,10 @@ public class HashMapAdapter extends ArrayAdapter<HashMap<String, String>> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.row_data, parent, false);
+        TextView listNomor = (TextView) rowView.findViewById(R.id.listNomor);
         TextView listNama = (TextView) rowView.findViewById(R.id.listNama);
         TextView listSkor = (TextView) rowView.findViewById(R.id.listSkor);
+        listNomor.setText((position+1)+".");
         HashMap<String, String> data = dataList.get(position);
         listNama.setText(data.get("nama"));
         listSkor.setText(data.get("totalSkor"));
