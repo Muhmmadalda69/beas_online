@@ -62,6 +62,18 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/bt_hapusakun"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/kotak"
+            android:text="Hapus Akun"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
         <Button
             android:id="@+id/bt_logout"
             android:layout_width="match_parent"

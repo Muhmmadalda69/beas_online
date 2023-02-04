@@ -7,23 +7,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DaftarActivity extends AppCompatActivity {
 
     private Button bt_daftar, bt_login;
-    private EditText et_username, et_alamat, et_email, et_password, et_konfirpassword;
+    private EditText et_username, et_email, et_password, et_konfirpassword;
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseDatabase database;
+    private DatabaseReference mRef;
 
     DatabaseReference mDatabase;
 
@@ -41,6 +46,8 @@ public class DaftarActivity extends AppCompatActivity {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDatabase.getInstance();
+        mRef = database.getReference().child("db_skor");
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -60,13 +67,7 @@ public class DaftarActivity extends AppCompatActivity {
             if(et_username.getText().length()>0 &&
                     et_email.getText().length()>0 &&
                     et_password.getText().length()>0){
-                if(et_password.getText().toString().equals(et_konfirpassword.getText().toString())){
-                    daftar(et_email.getText().toString(),
-                            et_password.getText().toString());
-                }else {
-                    Toast.makeText(getApplicationContext(),"Password tidak sama!",Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
+                checkDisplayName(et_username.getText().toString());
             }else {
                 Toast.makeText(getApplicationContext(),"Silahkan Masukan dulu semua data!",Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
@@ -95,6 +96,31 @@ public class DaftarActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void checkDisplayName(String displayName) {
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChild(displayName)) {
+                        progressDialog.dismiss();
+                        Toast.makeText(DaftarActivity.this, "Nama sudah digunakan", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (et_password.getText().toString().equals(et_konfirpassword.getText().toString())) {
+                            daftar(et_email.getText().toString(),
+                                    et_password.getText().toString());
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Password tidak sama!", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(DaftarActivity.this, "gagal menambahkan nama", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
