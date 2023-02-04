@@ -1,10 +1,14 @@
 package com.example.beas;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +29,7 @@ public class DaftarActivity extends AppCompatActivity {
 
     private Button bt_daftar, bt_login;
     private EditText et_username, et_email, et_password, et_konfirpassword;
+    private TextView tv_maxLength;
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
     private FirebaseDatabase database;
@@ -43,6 +48,40 @@ public class DaftarActivity extends AppCompatActivity {
         et_konfirpassword = findViewById(R.id.et_konfirpassword);
         bt_login = findViewById(R.id.bt_login);
         bt_daftar = findViewById(R.id.bt_daftar);
+        tv_maxLength = findViewById(R.id.max_length);
+
+        et_username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                tv_maxLength.setText(length +"/10");
+
+                //tidak pakai spasi
+                /*
+                if(editable.toString().contains(" ")){
+                    String inputTanpaSpasi = editable.toString().replace(" ", "");
+                    et_username.setText(inputTanpaSpasi);
+                    et_username.setSelection(inputTanpaSpasi.length());
+                    Toast.makeText(DaftarActivity.this, "Jangan Menggunakan Spasi!", Toast.LENGTH_SHORT).show();
+                }else {
+                    int length = editable.length();
+                    tv_maxLength.setText(length +"/10");
+                }
+
+                 */
+            }
+        });
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -140,5 +179,11 @@ public class DaftarActivity extends AppCompatActivity {
 
     private void onComplete(Task<Void> task1) {
         reload();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(DaftarActivity.this, LoginActivity.class));
+        finish();
     }
 }

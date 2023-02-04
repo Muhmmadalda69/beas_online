@@ -49,7 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         bt_hapusakun.setOnClickListener(view -> {
-            dbTotal.child(Objects.requireNonNull(firebaseUser.getDisplayName())).removeValue();
+            //dbTotal.child(Objects.requireNonNull(firebaseUser.getDisplayName())).removeValue();
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ProfileActivity.this);
             // set title dialog
             alertDialogBuilder.setTitle("Yakin menghapus akun anda?");
