@@ -124,13 +124,12 @@ public class L1Activity extends AppCompatActivity {
         iv_huruf.setImageDrawable(drawable);
     }
 
-    private String cekPhoto() {
-        if(jawaban =="é"){
+    private void cekPhoto() {
+        if(jawaban.equals("é")){
             mPhoto = "e_aksen";
         }else{
             mPhoto = jawaban;
         }
-        return jawaban;
     }
 
     //Membuat InnerClass untuk konfigurasi Countdown Time

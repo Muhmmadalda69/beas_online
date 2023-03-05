@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".L9Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="15dp">
+
+        <TextView
+            android:id="@+id/tv_waktu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Waktu"
+            android:fontFamily="@font/aladin_reguler"
+            android:textSize="25dp"
+            android:textColor="@color/warna_dasar"
+            android:layout_marginLeft="15dp"/>
+        <TextView
+            android:id="@+id/tv_timer"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
+            android:background="@drawable/oval"
+            android:layout_below="@+id/tv_waktu"
+            android:text="01.40"
+            android:gravity="center"
+            android:fontFamily="@font/aladin_reguler"
+            android:textColor="@color/white"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/aladin_reguler"
+            android:gravity="center_horizontal"
+            android:text="Level 9"
+            android:textColor="@color/warna_dasar"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/tv_soalKe"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/kotak"
+            android:gravity="center"
+            android:text="Soal 1"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/t_skor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/aladin_reguler"
+            android:text="Skor"
+            android:textColor="@color/warna_dasar"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/tv_skor"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/tv_waktu"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/oval"
+            android:fontFamily="@font/aladin_reguler"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_huruf"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/ka"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/et_jawaban"
+        android:layout_marginTop="30dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        style="@style/style_edittext"
+        android:hint="Tulis Jawabanmu"
+        android:inputType="textAutoComplete"/>
+
+    <Button
+        android:id="@+id/bt_jawab"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="Jawab"
+        android:fontFamily="sans-serif-black"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:imeOptions="actionSend"/>
+
+
+
+</LinearLayout>

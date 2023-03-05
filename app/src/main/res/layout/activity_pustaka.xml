@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingHorizontal="20dp"
-    android:layout_marginBottom="20dp"
+    android:layout_height="match_parent"
     tools:context=".PustakaActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingVertical="10dp">
+            android:id="@+id/llhead">
 
             <ImageView
                 android:layout_width="100dp"
@@ -30,180 +21,41 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/aladin_reguler"
-                android:text="@string/app_text"
+                android:text="Pustaka Aksara Sunda"
                 android:textColor="@color/warna_dasar"
-                android:textSize="25dp" />
+                android:textSize="30dp" />
         </LinearLayout>
 
-        //aksara ngalagena
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/oval"
-            android:fontFamily="sans-serif-black"
-            android:gravity="center"
-            android:text="Aksara Ngalagena"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llhead"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="20dp"/>
 
-        //ngalagena serapan
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="25dp"
+        android:layout_toStartOf="@+id/rightarrow"
+        android:text="Geser Kanan"
+        android:fontFamily="@font/aladin"
+        android:textColor="@color/warna_dasar"
+        android:textSize="30dp" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="-50dp"
-            android:layout_marginBottom="-30dp"
-            android:src="@drawable/g_ngalagena" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/oval"
-            android:fontFamily="sans-serif-black"
-            android:gravity="center"
-            android:text="Aksara Ngalagena Serapan"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/g_ngalagenaserapan" />
-        //aksara swara
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/oval"
-            android:fontFamily="sans-serif-black"
-            android:gravity="center"
-            android:text="Aksara Swara"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:baselineAligned="false"
-            android:src="@drawable/aksara_swara" />
-        //tulisan rarangken
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/oval"
-            android:fontFamily="sans-serif-black"
-            android:gravity="center"
-            android:text="Rarangken"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/ket_rarangken_ngalagena"
-            android:textColor="@color/warna_dasar"
-            android:textSize="15dp" />
-
-        //rangken atas
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:layout_marginTop="10dp"
-            android:text="1. Rarangken Luhur"
-            android:textColor="@color/warna_dasar"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:paddingLeft="25dp"
-            android:text="@string/rarangken_atas"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/rarangken_atas"
-            android:layout_marginTop="-30dp"/>
-        //rangkenbawah
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:layout_marginTop="20dp"
-            android:text="2. Rarangken Handap"
-            android:textColor="@color/warna_dasar"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:paddingLeft="25dp"
-            android:text="@string/rarangken_bawah"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/rangken_bawah"
-            android:layout_marginTop="-18dp"/>
-
-        //rangkensejajar
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:layout_marginTop="20dp"
-            android:text="3. Rarangken Sejajar"
-            android:textColor="@color/warna_dasar"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:paddingLeft="25dp"
-            android:text="@string/rarangken_sejajar"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/g_rangkensejajar"
-            android:layout_marginTop="-18dp"/>
-
-        //keterangan rarangken swara
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="rarangkén untuk aksara swara ada 3 buah"
-            android:textColor="@color/warna_dasar"
-            android:textSize="15dp" />
-
-        //panglayar
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:layout_marginTop="20dp"
-            android:text="1. Panglayar"
-            android:textColor="@color/warna_dasar"
-            android:textSize="20dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/panglayar"/>
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/rightarrow"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_rightarrow" />
 
 
-</ScrollView>
+
+</RelativeLayout>

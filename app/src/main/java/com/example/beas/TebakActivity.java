@@ -53,9 +53,20 @@ public class TebakActivity extends AppCompatActivity {
         int nilai5 = mSettings5.getInt("SkorLulus5",0);
 
         button_l7.setEnabled(false);
+        SharedPreferences mSettings6 = getSharedPreferences("PREFS6",0);
+        int nilai6 = mSettings6.getInt("SkorLulus6",0);
+
         button_l8.setEnabled(false);
+        SharedPreferences mSettings7 = getSharedPreferences("PREFS7",0);
+        int nilai7 = mSettings7.getInt("SkorLulus7",0);
+
         button_l9.setEnabled(false);
+        SharedPreferences mSettings8 = getSharedPreferences("PREFS8",0);
+        int nilai8 = mSettings8.getInt("SkorLulus8",0);
+
         button_l10.setEnabled(false);
+        SharedPreferences mSettings9 = getSharedPreferences("PREFS9",0);
+        int nilai9 = mSettings9.getInt("SkorLulus9",0);
 
         // LEVEL 1
         button_l1.setOnClickListener(view -> {
@@ -100,10 +111,42 @@ public class TebakActivity extends AppCompatActivity {
                         if (nilai5 >= 70) {
                             button_l6.setEnabled(true);
                             button_l6.setOnClickListener(view -> {
-                                Intent it = new Intent(TebakActivity.this, L5Activity.class);
+                                Intent it = new Intent(TebakActivity.this, L6Activity.class);
                                 startActivity(it);
                                 finish();
                             });
+                            if (nilai6 >= 70) {
+                                button_l7.setEnabled(true);
+                                button_l7.setOnClickListener(view -> {
+                                    Intent it = new Intent(TebakActivity.this, L7Activity.class);
+                                    startActivity(it);
+                                    finish();
+                                });
+                                if (nilai7 >= 70) {
+                                    button_l8.setEnabled(true);
+                                    button_l8.setOnClickListener(view -> {
+                                        Intent it = new Intent(TebakActivity.this, L8Activity.class);
+                                        startActivity(it);
+                                        finish();
+                                    });
+                                    if (nilai8 >= 70) {
+                                        button_l9.setEnabled(true);
+                                        button_l9.setOnClickListener(view -> {
+                                            Intent it = new Intent(TebakActivity.this, L9Activity.class);
+                                            startActivity(it);
+                                            finish();
+                                        });
+                                        if (nilai9 >= 70) {
+                                            button_l10.setEnabled(true);
+                                            button_l10.setOnClickListener(view -> {
+                                                Intent it = new Intent(TebakActivity.this, L10Activity.class);
+                                                startActivity(it);
+                                                finish();
+                                            });
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

@@ -35,7 +35,9 @@ public class DBSoal {
             "qa",
             "va",
             "xa",
-            "za")
+            "za",
+            "sya",
+            "kha")
     );
     List<String> list_ngalagenaSerapan = new ArrayList<>(ngalagenaSerapan);
 
@@ -129,6 +131,121 @@ public class DBSoal {
         String random = list_rangken.get(idx);
         return random;
     }// end getPertanyaan_lima
+
+    //soal level 6
+    Set<String> level6 = new HashSet<>(Arrays.asList(
+            "aya",
+            "kaca",
+            "maca",
+            "mana",
+            "mata",
+            "mawa",
+            "naga",
+            "raja",
+            "rawa",
+            "saha")
+    );
+    List<String> list_level6 = new ArrayList<>(level6);
+
+    //membuat getter untuk mengambil jawaban benar
+    public String getPertanyaan_enam(int idx) {
+        int size = list_level6.size();
+        idx = new Random().nextInt(size);
+        String random = list_level6.get(idx);
+        return random;
+    }// end getPertanyaan_enam
+
+    //soal level 7
+    Set<String> level7 = new HashSet<>(Arrays.asList(
+            "batu",
+            "calana",
+            "carita",
+            "gagang",
+            "gali",
+            "kayu",
+            "mawar",
+            "mirasa",
+            "ratu",
+            "sapu")
+    );
+    List<String> list_level7 = new ArrayList<>(level7);
+
+    //membuat getter untuk mengambil jawaban benar
+    public String getPertanyaan_tujuh(int idx) {
+        int size = list_level7.size();
+        idx = new Random().nextInt(size);
+        String random = list_level7.get(idx);
+        return random;
+    }// end getPertanyaan_tujuh
+
+    //soal level 8
+    Set<String> level8 = new HashSet<>(Arrays.asList(
+            "jawara",
+            "karawang",
+            "makalang",
+            "nakula",
+            "rahwana",
+            "ramayana",
+            "saha",
+            "sakola",
+            "sapatu",
+            "tandang")
+    );
+    List<String> list_level8 = new ArrayList<>(level8);
+
+    //membuat getter untuk mengambil jawaban benar
+    public String getPertanyaan_dalapan(int idx) {
+        int size = list_level8.size();
+        idx = new Random().nextInt(size);
+        String random = list_level8.get(idx);
+        return random;
+    }// end getPertanyaan_dalapan
+
+    //soal level 9
+    Set<String> level9 = new HashSet<>(Arrays.asList(
+            "brebes",
+            "hirup",
+            "hordéng",
+            "kasur",
+            "kéong",
+            "merdéka",
+            "prabu",
+            "priangan",
+            "sendal",
+            "téras")
+    );
+    List<String> list_level9 = new ArrayList<>(level9);
+
+    //membuat getter untuk mengambil jawaban benar
+    public String getPertanyaan_salapan(int idx) {
+        int size = list_level9.size();
+        idx = new Random().nextInt(size);
+        String random = list_level9.get(idx);
+        return random;
+    }// end getPertanyaan_salapan
+
+    //soal level 10
+    Set<String> level10 = new HashSet<>(Arrays.asList(
+            "budak leutik bisa ngapung",
+            "Hirup kudu silih asih",
+            "Moal ngejat sanajan ukur satapak",
+            "Numpes musuh sarakah",
+            "Larak lirik ningali ka bumi",
+            "Mungguh nu hirup di dunya",
+            "Henteu puguh nu dijugjug",
+            "Naha naon dosa kula",
+            "Nyiar bogo meunang kadal",
+            "Di wétan pajar balébat")
+    );
+    List<String> list_level10 = new ArrayList<>(level10);
+
+    //membuat getter untuk mengambil jawaban benar
+    public String getPertanyaan_sapuluh(int idx) {
+        int size = list_level10.size();
+        idx = new Random().nextInt(size);
+        String random = list_level10.get(idx);
+        return random;
+    }// end getPertanyaan_sapuluh
 
 }//end class
 

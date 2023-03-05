@@ -18,6 +18,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Beas">
         <activity
+            android:name=".L10Activity"
+            android:exported="false" />
+        <activity
+            android:name=".L9Activity"
+            android:exported="false" />
+        <activity
+            android:name=".L8Activity"
+            android:exported="false" />
+        <activity
+            android:name=".L7Activity"
+            android:exported="false" />
+        <activity
+            android:name=".L6Activity"
+            android:exported="false" />
+        <activity
             android:name=".LupaPasswordActivity"
             android:exported="false" />
         <activity
