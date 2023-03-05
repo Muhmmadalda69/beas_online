@@ -215,6 +215,12 @@ public class L10Activity extends AppCompatActivity {
                     String namaUser = Objects.requireNonNull(firebaseUser).getDisplayName();
                     nilai10 = new Nilai();
                     submitSkor(new Nilai(namaUser, jumlahSkor));
+
+                    //game selesai
+                    Toast.makeText(L10Activity.this, "Selamat anda menyelesaikan LEVEL 10\nPerbaiki skor di seluruh level agar anda menjadi yang terbaik", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(),TebakActivity.class);
+                    startActivity(intent);
+                    finish();
                 });
 
         // membuat alert dialog dari builder
