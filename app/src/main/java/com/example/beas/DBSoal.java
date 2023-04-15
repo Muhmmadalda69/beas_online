@@ -1,13 +1,19 @@
 package com.example.beas;
 
+import com.example.beas.model.ShuffleRandom;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 public class DBSoal {
+    Random rando = new Random();
+
+    ShuffleRandom rand = new ShuffleRandom();
 
     //soal level 1
         Set<String> swara = new HashSet<>(Arrays.asList(
@@ -24,7 +30,10 @@ public class DBSoal {
         //membuat getter untuk mengambil jawaban benar
         public String getPertanyaan_satu(int idx) {
             int size = list_swara.size();
-            idx = new Random().nextInt(size);
+            for (int i = size; i > 1; i--) {
+                idx = rand.shuffleList(i);
+                Collections.swap(list_swara, i - 1, idx);
+            }
             String random = list_swara.get(idx);
             return random;
         }// end getPertanyaan_satu
@@ -44,7 +53,10 @@ public class DBSoal {
     //membuat getter untuk mengambil jawaban benar
     public String getPertanyaan_dua(int idx) {
         int size = list_ngalagenaSerapan.size();
-        idx = new Random().nextInt(size);
+        for (int i = size; i > 1; i--) {
+            idx = rand.shuffleList(i);
+            Collections.swap(list_ngalagenaSerapan, i - 1, idx);
+        }
         String random = list_ngalagenaSerapan.get(idx);
         return random;
     }// end getPertanyaan_dua
@@ -67,7 +79,10 @@ public class DBSoal {
     //membuat getter untuk mengambil jawaban benar
     public String getPertanyaan_tiga(int idx) {
         int size = list_angka.size();
-        idx = new Random().nextInt(size);
+        for (int i = size; i > 1; i--) {
+            idx = rand.shuffleList(i);
+            Collections.swap(list_angka, i - 1, idx);
+        }
         String random = list_angka.get(idx);
         return random;
     }// end getPertanyaan_angka
@@ -98,7 +113,10 @@ public class DBSoal {
     //membuat getter untuk mengambil jawaban benar
     public String getPertanyaan_empat(int idx) {
         int size = list_ngalagena.size();
-        idx = new Random().nextInt(size);
+        for (int i = size; i > 1; i--) {
+            idx = rand.shuffleList(i);
+            Collections.swap(list_ngalagena, i - 1, idx);
+        }
         String random = list_ngalagena.get(idx);
         return random;
     }// end getPertanyaan_empat
@@ -127,7 +145,10 @@ public class DBSoal {
     //membuat getter untuk mengambil jawaban benar
     public String getPertanyaan_lima(int idx) {
         int size = list_rangken.size();
-        idx = new Random().nextInt(size);
+        for (int i = size; i > 1; i--) {
+            idx = rand.shuffleList(i);
+            Collections.swap(list_rangken, i - 1, idx);
+        }
         String random = list_rangken.get(idx);
         return random;
     }// end getPertanyaan_lima
@@ -150,7 +171,10 @@ public class DBSoal {
     //membuat getter untuk mengambil jawaban benar
     public String getPertanyaan_enam(int idx) {
         int size = list_level6.size();
-        idx = new Random().nextInt(size);
+        for (int i = size; i > 1; i--) {
+            idx = rand.shuffleList(i);
+            Collections.swap(list_level6, i - 1, idx);
+        }
         String random = list_level6.get(idx);
         return random;
     }// end getPertanyaan_enam
@@ -173,7 +197,10 @@ public class DBSoal {
     //membuat getter untuk mengambil jawaban benar
     public String getPertanyaan_tujuh(int idx) {
         int size = list_level7.size();
-        idx = new Random().nextInt(size);
+        for (int i = size; i > 1; i--) {
+            idx = rand.shuffleList(i);
+            Collections.swap(list_level7, i - 1, idx);
+        }
         String random = list_level7.get(idx);
         return random;
     }// end getPertanyaan_tujuh
@@ -196,7 +223,10 @@ public class DBSoal {
     //membuat getter untuk mengambil jawaban benar
     public String getPertanyaan_dalapan(int idx) {
         int size = list_level8.size();
-        idx = new Random().nextInt(size);
+        for (int i = size; i > 1; i--) {
+            idx = rand.shuffleList(i);
+            Collections.swap(list_level8, i - 1, idx);
+        }
         String random = list_level8.get(idx);
         return random;
     }// end getPertanyaan_dalapan
@@ -219,7 +249,10 @@ public class DBSoal {
     //membuat getter untuk mengambil jawaban benar
     public String getPertanyaan_salapan(int idx) {
         int size = list_level9.size();
-        idx = new Random().nextInt(size);
+        for (int i = size; i > 1; i--) {
+            idx = rand.shuffleList(i);
+            Collections.swap(list_level9, i - 1, idx);
+        }
         String random = list_level9.get(idx);
         return random;
     }// end getPertanyaan_salapan
@@ -242,7 +275,10 @@ public class DBSoal {
     //membuat getter untuk mengambil jawaban benar
     public String getPertanyaan_sapuluh(int idx) {
         int size = list_level10.size();
-        idx = new Random().nextInt(size);
+        for (int i = size; i > 1; i--) {
+            idx = rand.shuffleList(i);
+            Collections.swap(list_level10, i - 1, idx);
+        }
         String random = list_level10.get(idx);
         return random;
     }// end getPertanyaan_sapuluh

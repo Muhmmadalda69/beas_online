@@ -14,7 +14,8 @@ public class PustakaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pustaka);
 
-        int[] imageIds = new int[] { R.drawable.pustaka_ngalagena, R.drawable.pustaka_rarangken, R.drawable.pustaka_angka };
+        int[] imageIds = new int[] { R.drawable.pustaka_swara, R.drawable.pustaka_angka,
+                R.drawable.pustaka_ngalagena, R.drawable.pustaka_rarangken };
 
         mViewPager = findViewById(R.id.view_pager);
         ImagePagerAdapter adapter = new ImagePagerAdapter(this, imageIds);
