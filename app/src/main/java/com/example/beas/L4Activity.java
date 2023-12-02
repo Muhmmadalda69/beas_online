@@ -16,6 +16,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beas.model.Nilai;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +55,16 @@ public class L4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //ubah
         setContentView(R.layout.activity_l4);
+
+        //ADMOB
+        MobileAds.initialize(this, initializationStatus -> {
+        });
+
+        //ADMOB BANNER
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         //FIREBASE
         database = FirebaseDatabase.getInstance().getReference("db_skor");

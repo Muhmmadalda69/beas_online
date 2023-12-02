@@ -1,23 +1,24 @@
 package com.example.beas;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.io.Closeable;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 public class MainActivity extends AppCompatActivity{
-    private TextView tv_nama;
+
+    private InterstitialAd mInterstitialAd;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -25,11 +26,39 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //ADMOB
+        MobileAds.initialize(this, initializationStatus -> {
+        });
+
+        //ADMOB Interstitial
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        Log.i(TAG, "onAdLoaded");
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.d(TAG, loadAdError.toString());
+                        mInterstitialAd = null;
+                    }
+                });
+
+        //ADMOB BANNER
+        AdView mAdView = findViewById(R.id.adView);
+        mAdView.loadAd(adRequest);
+
         Button button = findViewById(R.id.bt_th);
         Button bt_ts = findViewById(R.id.bt_ts);
         Button bt_pustaka = findViewById(R.id.bt_pustaka);
         Button bt_profile = findViewById(R.id.bt_profil);
-
 
         button.setOnClickListener(view12 -> {
             Intent intent = new Intent(MainActivity.this, TebakActivity.class);
@@ -38,6 +67,7 @@ public class MainActivity extends AppCompatActivity{
 
         bt_ts.setOnClickListener(view1 -> {
             Intent it = new Intent(MainActivity.this, LihatSkorActivity.class);
+            mInterstitialAd.show(MainActivity.this);
             startActivity(it);
         });
 

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     viewBinding{
         enabled = true
@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "com.example.beas"
         minSdk 24
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -57,6 +57,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.4.1'
     implementation 'com.google.firebase:firebase-storage:20.1.0'
     implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.2'
+
+    //ADMOB
+    implementation 'com.google.android.gms:play-services-ads:22.5.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

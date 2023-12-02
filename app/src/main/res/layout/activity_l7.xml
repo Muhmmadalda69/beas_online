@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     tools:context=".L7Activity">
@@ -89,7 +90,7 @@
         android:id="@+id/et_jawaban"
         android:layout_marginTop="30dp"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         style="@style/style_edittext"
         android:hint="Tulis Jawabanmu"
         android:inputType="textAutoComplete"/>
@@ -104,6 +105,14 @@
         android:textSize="20dp"
         android:imeOptions="actionSend"/>
 
-
-
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginTop="95dp"
+        android:layout_weight="@integer/google_play_services_version"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
 </LinearLayout>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     tools:context=".L1Activity">
@@ -20,7 +21,7 @@
             android:fontFamily="@font/aladin_reguler"
             android:textSize="25sp"
             android:textColor="@color/warna_dasar"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             tools:ignore="HardcodedText" />
         <TextView
             android:id="@+id/tv_timer"
@@ -32,7 +33,8 @@
             android:gravity="center"
             android:fontFamily="@font/aladin_reguler"
             android:textColor="@color/white"
-            android:textSize="20dp"/>
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:layout_width="match_parent"
@@ -41,7 +43,8 @@
             android:gravity="center_horizontal"
             android:text="Level 1"
             android:textColor="@color/warna_dasar"
-            android:textSize="30dp"/>
+            android:textSize="30sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/tv_soalKe"
@@ -59,11 +62,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:fontFamily="@font/aladin_reguler"
             android:text="Skor"
             android:textColor="@color/warna_dasar"
-            android:textSize="25dp" />
+            android:textSize="25sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/tv_skor"
@@ -76,7 +80,8 @@
             android:gravity="center"
             android:text="0"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
     </RelativeLayout>
 
     <ImageView
@@ -84,16 +89,19 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:src="@drawable/ka"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:importantForAccessibility="no" />
 
     <EditText
         android:id="@+id/et_jawaban"
         android:layout_marginTop="30dp"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         style="@style/style_edittext"
         android:hint="Tulis Jawabanmu"
-        android:inputType="textAutoComplete"/>
+        android:inputType="textAutoComplete"
+        tools:ignore="HardcodedText"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/bt_jawab"
@@ -102,7 +110,19 @@
         android:text="Jawab"
         android:fontFamily="sans-serif-black"
         android:textStyle="bold"
-        android:textSize="20dp"
-        android:imeOptions="actionSend"/>
+        android:textSize="20sp"
+        android:imeOptions="actionSend"
+        tools:ignore="HardcodedText,TextViewEdits" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginTop="95dp"
+        android:layout_weight="@integer/google_play_services_version"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
 
 </LinearLayout>

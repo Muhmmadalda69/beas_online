@@ -3,6 +3,7 @@ package com.example.beas;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         lupa_password = findViewById(R.id.tv_lupapassword);
         bt_login = findViewById(R.id.bt_login);
         bt_daftar = findViewById(R.id.bt_daftar);
+
+        String email =et_username.getText().toString();
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -62,19 +65,27 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(String email,String password){
         progressDialog.show();
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if(task.isSuccessful() && task.getResult()!=null){
-                progressDialog.cancel();
-                if(task.getResult().getUser()!=null){
-                    reload();
+        // Melakukan validasi email menggunakan Patterns.EMAIL_ADDRESS.matcher
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            // Email valid, lanjutkan dengan tindakan yang diinginkan
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if(task.isSuccessful() && task.getResult()!=null){
+                    progressDialog.cancel();
+                    if(task.getResult().getUser()!=null){
+                        reload();
+                    }else {
+                        Toast.makeText(LoginActivity.this, "Login gagal", Toast.LENGTH_SHORT).show();
+                    }
                 }else {
+                    progressDialog.cancel();
                     Toast.makeText(LoginActivity.this, "Login gagal", Toast.LENGTH_SHORT).show();
                 }
-            }else {
-                progressDialog.cancel();
-                Toast.makeText(LoginActivity.this, "Login gagal", Toast.LENGTH_SHORT).show();
-            }
-        });
+            });
+        } else {
+            // Email tidak valid, berikan umpan balik ke pengguna
+            Toast.makeText(this, "Penulisan Email salah!", Toast.LENGTH_LONG).show();
+            progressDialog.cancel();
+        }
     }
 
     @Override
