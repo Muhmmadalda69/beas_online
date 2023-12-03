@@ -13,9 +13,10 @@ android {
     defaultConfig {
         applicationId "com.example.beas"
         minSdk 24
+        //noinspection OldTargetApi
         targetSdk 33
         versionCode 1
-        versionName "1.0"
+        versionName "1.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -60,6 +61,9 @@ dependencies {
 
     //ADMOB
     implementation 'com.google.android.gms:play-services-ads:22.5.0'
+
+    //picaso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

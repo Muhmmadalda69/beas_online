@@ -104,7 +104,7 @@ public class DBSoal {
             "ya",
             "ra",
             "la",
-            "Wa",
+            "wa",
             "sa",
             "ha")
     );

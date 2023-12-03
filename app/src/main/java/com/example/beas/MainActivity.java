@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity{
         //ADMOB Interstitial
         AdRequest adRequest = new AdRequest.Builder().build();
 
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest,
+        InterstitialAd.load(this,"ca-app-pub-1594974002597382/7193557755", adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
@@ -62,21 +62,32 @@ public class MainActivity extends AppCompatActivity{
 
         button.setOnClickListener(view12 -> {
             Intent intent = new Intent(MainActivity.this, TebakActivity.class);
+            if (mInterstitialAd != null) {
+                mInterstitialAd.show(MainActivity.this);
+            }
             startActivity(intent);
         });
 
         bt_ts.setOnClickListener(view1 -> {
             Intent it = new Intent(MainActivity.this, LihatSkorActivity.class);
-            mInterstitialAd.show(MainActivity.this);
+            if (mInterstitialAd != null) {
+                mInterstitialAd.show(MainActivity.this);
+            }
             startActivity(it);
         });
 
         bt_pustaka.setOnClickListener(view1 -> {
             Intent i = new Intent(MainActivity.this, PustakaActivity.class);
+            if (mInterstitialAd != null) {
+                mInterstitialAd.show(MainActivity.this);
+            }
             startActivity(i);
         });
         bt_profile.setOnClickListener(view1 -> {
             Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+            if (mInterstitialAd != null) {
+                mInterstitialAd.show(MainActivity.this);
+            }
             startActivity(i);
         });
     }

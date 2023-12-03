@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,14 +20,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class EditProfileActivity extends AppCompatActivity{
@@ -40,6 +39,10 @@ public class EditProfileActivity extends AppCompatActivity{
 
     final int kodeGallery = 100, kodeKamera = 99;
     Uri imageUri;
+
+    // Inside your onCreate method
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference = storage.getReference();
 
 
     @Override
@@ -71,11 +74,13 @@ public class EditProfileActivity extends AppCompatActivity{
         bt_save.setOnClickListener(view -> {
             progressDialog.show();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
             UserProfileChangeRequest profileUpdates = null;
             if (imageUri != null) {
                 profileUpdates = new UserProfileChangeRequest.Builder()
                         .setPhotoUri(imageUri)
                         .build();
+
             } else {
                 profileUpdates = new UserProfileChangeRequest.Builder()
                         .setPhotoUri(firebaseUser.getPhotoUrl())
@@ -87,10 +92,20 @@ public class EditProfileActivity extends AppCompatActivity{
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                progressDialog.dismiss();
-                                Toast.makeText(EditProfileActivity.this, "Foto Diubah", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
-                                finish();
+                                StorageReference photoRef = storageReference.child("profile_photos/" + firebaseUser.getDisplayName() + ".jpg");
+                                photoRef.putFile(imageUri).addOnCompleteListener(task1 -> {
+                                   photoRef.getDownloadUrl();
+                                    // Update the Realtime Database with the photo URL
+                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Foto_profil")
+                                            .child(Objects.requireNonNull(firebaseUser.getDisplayName()));
+                                    Map<String, Object> updateMap = new HashMap<>();
+                                    updateMap.put("photoUrl", photoRef.toString());
+                                    databaseReference.updateChildren(updateMap);
+                                    Toast.makeText(EditProfileActivity.this, "Foto Diubah", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
+                                    progressDialog.dismiss();
+                                    finish();
+                                });
                             }
                         }
                     });
