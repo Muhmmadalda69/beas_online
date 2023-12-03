@@ -2,6 +2,7 @@ package com.example.beas.model;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.example.beas.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,7 @@ public class HashMapAdapter extends ArrayAdapter<HashMap<String, String>> {
     @NonNull
     @SuppressLint("SetTextI18n")
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         @SuppressLint("ViewHolder") View rowView = inflater.inflate(R.layout.row_data, parent, false);
 
@@ -41,11 +42,18 @@ public class HashMapAdapter extends ArrayAdapter<HashMap<String, String>> {
         HashMap<String, String> data = dataList.get(position);
 
         // Mengambil nama pengguna dan mengonkatenasi dengan koleksi "Foto_profil"
-        String username = data.get("nama");
-        String photoUrl = "https://console.firebase.google.com/u/0/project/beas-dfb0e/database/beas-dfb0e-default-rtdb/data/~2F/Foto_profil/" + username + ".jpg";
+        String photoUrl = data.get("fotoUrl");
 
-        // Memuat foto menggunakan Picasso
-        Picasso.get().load(photoUrl).into(listFoto);
+// Periksa apakah photoUrl tidak kosong sebelum memuat dengan Picasso
+        if (!TextUtils.isEmpty(photoUrl)) {
+            // Memuat foto menggunakan Picasso
+            Glide.with(context).load(photoUrl).into(listFoto);
+        } else {
+            // Handle kasus ketika photoUrl kosong
+            // Misalnya, set default image atau tampilkan pesan kesalahan
+            listFoto.setImageResource(R.drawable.profile_male); // Gantilah dengan sumber daya gambar default
+        }
+
 
 
         listNama.setText(data.get("nama"));

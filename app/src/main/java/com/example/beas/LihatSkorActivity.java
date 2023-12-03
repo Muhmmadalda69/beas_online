@@ -21,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +35,7 @@ public class LihatSkorActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference dbSkorRef = database.getReference("db_skor");
     DatabaseReference dbTotal = database.getReference("db_total");
+    DatabaseReference dbFoto = database.getReference("Foto_profil");
 
     ListView listView;
     TextView mySkor;
@@ -44,6 +44,7 @@ public class LihatSkorActivity extends AppCompatActivity {
     int totalNilai = 0;
 
     private List<HashMap<String, String>> dataList = new ArrayList<>();
+    private Map<String, String> dataFoto = new HashMap<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -54,29 +55,59 @@ public class LihatSkorActivity extends AppCompatActivity {
         listView = findViewById(R.id.tv_skor);
         mySkor = findViewById(R.id.mySkor);
 
-
-        dbSkorRef.child(namaUser).addValueEventListener(new ValueEventListener() {
+        dbFoto.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot nilaiSnapshot : snapshot.getChildren()) {
-                    level1 = nilaiSnapshot.getValue(String.class);
-                    assert level1 != null;
-                    totalNilai += Integer.parseInt(level1);
+            public void onDataChange(@NonNull DataSnapshot snapshotFoto) {
+                // Bersihkan dataFoto sebelum mengisinya
+                dataFoto.clear();
+
+                // Ambil data foto dari snapshot
+                for (DataSnapshot fotoSnapshot : snapshotFoto.getChildren()) {
+                    String namaPengguna = fotoSnapshot.getKey();
+                    String fotoValue = fotoSnapshot.getValue().toString();
+
+                    // Tambahkan data foto ke dalam dataFoto
+                    dataFoto.put(namaPengguna, fotoValue);
                 }
-                mySkor.setText(namaUser + " - " + totalNilai);
-                dbTotal.child(namaUser).setValue(totalNilai);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle onCancelled
             }
         });
+
+
+    }
+
+    // Tambahkan metode berikut di dalam kelas Anda
+    private void hitungTotalNilai(DataSnapshot snapshot) {
+        totalNilai = 0;
+        for (DataSnapshot nilaiSnapshot : snapshot.getChildren()) {
+            level1 = nilaiSnapshot.getValue(String.class);
+            assert level1 != null;
+            totalNilai += Integer.parseInt(level1);
+        }
+        mySkor.setText(namaUser + " - " + totalNilai);
+        dbTotal.child(namaUser).setValue(totalNilai);
     }
 
 
     protected void onStart(){
         super.onStart();
+
+        dbSkorRef.child(namaUser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                hitungTotalNilai(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle onCancelled
+            }
+        });
+
         dbTotal.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -86,25 +117,30 @@ public class LihatSkorActivity extends AppCompatActivity {
                 Map<String, Long> data = (Map<String, Long>) dataSnapshot.getValue();
 
                 List<Map.Entry<String, Long>> list = new ArrayList<>(data.entrySet());
-                Collections.sort(list, new Comparator<Map.Entry<String, Long>>() {
-                    @Override
-                    public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
-                        return o2.getValue().compareTo(o1.getValue());
-                    }
-                });
+                Collections.sort(list, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 
                 for (Map.Entry<String, Long> entry : list) {
+                    String nama = entry.getKey();
+                    Long totalSkor = entry.getValue();
+
+                    // Ambil URL foto dari dbFoto
+                    String fotoUrl = "";
+                    if (dataFoto.containsKey(nama)) {
+                        fotoUrl = dataFoto.get(nama).toString();
+                    }
+
                     HashMap<String, String> data1 = new HashMap<>();
-                    data1.put("nama", entry.getKey());
-                    data1.put("totalSkor", entry.getValue().toString());
+                    data1.put("nama", nama);
+                    data1.put("totalSkor", totalSkor.toString());
+                    data1.put("fotoUrl", fotoUrl);
                     dataList.add(data1);
                 }
-                // Find the ListView and set the adapter
-                ListView listView = (ListView) findViewById(R.id.tv_skor);
+
+                // Set adapter
+                ListView listView = findViewById(R.id.tv_skor);
                 HashMapAdapter adapter = new HashMapAdapter(LihatSkorActivity.this, dataList);
                 listView.setAdapter(adapter);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(LihatSkorActivity.this, "Terjadi kesalahan.", Toast.LENGTH_SHORT).show();

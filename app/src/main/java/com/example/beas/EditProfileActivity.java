@@ -27,7 +27,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class EditProfileActivity extends AppCompatActivity{
@@ -94,17 +93,38 @@ public class EditProfileActivity extends AppCompatActivity{
                             if (task.isSuccessful()) {
                                 StorageReference photoRef = storageReference.child("profile_photos/" + firebaseUser.getDisplayName() + ".jpg");
                                 photoRef.putFile(imageUri).addOnCompleteListener(task1 -> {
-                                   photoRef.getDownloadUrl();
-                                    // Update the Realtime Database with the photo URL
-                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Foto_profil")
-                                            .child(Objects.requireNonNull(firebaseUser.getDisplayName()));
-                                    Map<String, Object> updateMap = new HashMap<>();
-                                    updateMap.put("photoUrl", photoRef.toString());
-                                    databaseReference.updateChildren(updateMap);
-                                    Toast.makeText(EditProfileActivity.this, "Foto Diubah", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
-                                    progressDialog.dismiss();
-                                    finish();
+                                    if (task1.isSuccessful()) {
+                                        // Setelah upload selesai, dapatkan URL gambar dari Firebase Storage
+                                        photoRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                                            // Uri ini berisi URL gambar yang dapat Anda gunakan
+                                            String imageUrl = uri.toString();
+
+                                            // Update the Realtime Database with the photo URL
+                                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Foto_profil");
+                                            Map<String, Object> updateMap = new HashMap<>();
+                                            updateMap.put(firebaseUser.getDisplayName(), imageUrl);
+                                            databaseReference.updateChildren(updateMap);
+
+                                            Toast.makeText(EditProfileActivity.this, "Foto Diubah", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
+                                            progressDialog.dismiss();
+                                            finish();
+                                        }).addOnFailureListener(e -> {
+                                            // Handle error getting download URL
+                                            Toast.makeText(EditProfileActivity.this, "Gagal mendapatkan URL gambar", Toast.LENGTH_SHORT).show();
+                                            progressDialog.dismiss();
+                                        });
+                                    }
+//                                   photoRef.getDownloadUrl();
+//                                    // Update the Realtime Database with the photo URL
+//                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Foto_profil");
+//                                    Map<String, Object> updateMap = new HashMap<>();
+//                                    updateMap.put(user.getDisplayName(), photoRef.toString());
+//                                    databaseReference.updateChildren(updateMap);
+//                                    Toast.makeText(EditProfileActivity.this, "Foto Diubah", Toast.LENGTH_SHORT).show();
+//                                    startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
+//                                    progressDialog.dismiss();
+//                                    finish();
                                 });
                             }
                         }
