@@ -11,12 +11,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.beas"
+        applicationId "com.taruma.beas"
         minSdk 24
         //noinspection OldTargetApi
         targetSdk 33
-        versionCode 1
-        versionName "1.1.1"
+        versionCode 3
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

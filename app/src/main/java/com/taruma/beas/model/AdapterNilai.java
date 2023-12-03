@@ -1,4 +1,4 @@
-package com.example.beas.model;
+package com.taruma.beas.model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,13 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.beas.R;
+import com.taruma.beas.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AdapterNilai extends BaseAdapter {
 

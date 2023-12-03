@@ -1,6 +1,5 @@
-package com.example.beas.model;
+package com.taruma.beas.model;
 
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ShuffleRandom implements java.io.Serializable {

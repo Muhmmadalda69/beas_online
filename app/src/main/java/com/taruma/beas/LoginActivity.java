@@ -1,4 +1,4 @@
-package com.example.beas;
+package com.taruma.beas;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

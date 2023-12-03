@@ -1,8 +1,5 @@
-package com.example.beas.model;
+package com.taruma.beas.model;
 
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;

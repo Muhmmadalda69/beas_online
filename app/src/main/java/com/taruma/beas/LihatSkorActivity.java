@@ -1,4 +1,4 @@
-package com.example.beas;
+package com.taruma.beas;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.beas.model.HashMapAdapter;
-import com.example.beas.model.Nilai;
+import com.taruma.beas.model.HashMapAdapter;
+import com.taruma.beas.model.Nilai;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

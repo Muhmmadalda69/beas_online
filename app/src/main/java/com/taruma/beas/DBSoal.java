@@ -1,6 +1,6 @@
-package com.example.beas;
+package com.taruma.beas;
 
-import com.example.beas.model.ShuffleRandom;
+import com.taruma.beas.model.ShuffleRandom;
 
 import java.util.ArrayList;
 import java.util.Arrays;

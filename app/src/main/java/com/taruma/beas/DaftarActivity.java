@@ -1,4 +1,4 @@
-package com.example.beas;
+package com.taruma.beas;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -23,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DaftarActivity extends AppCompatActivity {
 

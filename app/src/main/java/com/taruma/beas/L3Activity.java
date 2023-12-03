@@ -1,4 +1,4 @@
-package com.example.beas;
+package com.taruma.beas;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.beas.model.Nilai;
+import com.taruma.beas.model.Nilai;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;

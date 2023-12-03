@@ -1,4 +1,4 @@
-package com.example.beas.model;
+package com.taruma.beas.model;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
-import com.example.beas.R;
+import com.taruma.beas.R;
 
 import java.util.HashMap;
 import java.util.List;

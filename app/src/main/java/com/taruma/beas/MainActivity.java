@@ -1,4 +1,4 @@
-package com.example.beas;
+package com.taruma.beas;
 
 import static android.content.ContentValues.TAG;
 

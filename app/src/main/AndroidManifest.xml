@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.beas">
+    package="com.taruma.beas">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -27,67 +27,67 @@
             android:value="ca-app-pub-1594974002597382~4905154381"/>
 
         <activity
-            android:name=".L10Activity"
+            android:name="com.taruma.beas.L10Activity"
             android:exported="false" />
         <activity
-            android:name=".L9Activity"
+            android:name="com.taruma.beas.L9Activity"
             android:exported="false" />
         <activity
-            android:name=".L8Activity"
+            android:name="com.taruma.beas.L8Activity"
             android:exported="false" />
         <activity
-            android:name=".L7Activity"
+            android:name="com.taruma.beas.L7Activity"
             android:exported="false" />
         <activity
-            android:name=".L6Activity"
+            android:name="com.taruma.beas.L6Activity"
             android:exported="false" />
         <activity
-            android:name=".LupaPasswordActivity"
+            android:name="com.taruma.beas.LupaPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".EditPasswordActivity"
+            android:name="com.taruma.beas.EditPasswordActivity"
             android:exported="false" /> <!-- Menambahkan Activity Untuk Cropping Image -->
         <activity
-            android:name=".EditProfileActivity"
+            android:name="com.taruma.beas.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
+            android:name="com.taruma.beas.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".DaftarActivity"
+            android:name="com.taruma.beas.DaftarActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.taruma.beas.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".L5Activity"
+            android:name="com.taruma.beas.L5Activity"
             android:exported="false" />
         <activity
-            android:name=".L4Activity"
+            android:name="com.taruma.beas.L4Activity"
             android:exported="false" />
         <activity
-            android:name=".L3Activity"
+            android:name="com.taruma.beas.L3Activity"
             android:exported="false" />
         <activity
-            android:name=".L2Activity"
+            android:name="com.taruma.beas.L2Activity"
             android:exported="false" />
         <activity
-            android:name=".PustakaActivity"
+            android:name="com.taruma.beas.PustakaActivity"
             android:exported="false" />
         <activity
-            android:name=".LihatSkorActivity"
+            android:name="com.taruma.beas.LihatSkorActivity"
             android:exported="false" />
         <activity
-            android:name=".L1Activity"
+            android:name="com.taruma.beas.L1Activity"
             android:exported="false" />
         <activity
-            android:name=".TebakActivity"
+            android:name="com.taruma.beas.TebakActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.taruma.beas.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.taruma.beas.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

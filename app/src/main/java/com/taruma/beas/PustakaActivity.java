@@ -1,4 +1,4 @@
-package com.example.beas;
+package com.taruma.beas;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;

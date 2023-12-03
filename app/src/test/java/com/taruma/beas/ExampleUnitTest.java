@@ -1,4 +1,4 @@
-package com.example.beas;
+package com.taruma.beas;
 
 import org.junit.Test;
 
